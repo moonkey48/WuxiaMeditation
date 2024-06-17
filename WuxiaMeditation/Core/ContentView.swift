@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
+    
     var body: some View {
         if isOnboarding {
             OnboardingView()
