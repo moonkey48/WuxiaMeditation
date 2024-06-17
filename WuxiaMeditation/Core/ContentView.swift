@@ -13,7 +13,7 @@ struct ContentView: View {
         if isOnboarding {
             OnboardingView()
         } else {
-            EnergyCenterView()
+            MainView()
         }
     }
 }

@@ -14,7 +14,7 @@
 		3A5AFB7F2C1CA8490093D449 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB7E2C1CA8490093D449 /* OnboardingView.swift */; };
 		3A5AFB812C1CA9090093D449 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFB802C1CA9090093D449 /* Color.xcassets */; };
 		3A5AFB842C1CA9B20093D449 /* LargeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB832C1CA9B20093D449 /* LargeButtonView.swift */; };
-		3A5AFB862C1CAC8B0093D449 /* EnergyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB852C1CAC8B0093D449 /* EnergyCenterView.swift */; };
+		3A5AFB862C1CAC8B0093D449 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB852C1CAC8B0093D449 /* MainView.swift */; };
 		3A5AFB8A2C1CB0C10093D449 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB892C1CB0C10093D449 /* Font+.swift */; };
 		3A5AFB8E2C1CB1780093D449 /* GapyeongHanseokbongL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFB8B2C1CB1780093D449 /* GapyeongHanseokbongL.otf */; };
 		3A5AFB8F2C1CB1780093D449 /* GapyeongHanseokbongB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFB8C2C1CB1780093D449 /* GapyeongHanseokbongB.otf */; };
@@ -31,6 +31,7 @@
 		3A5AFBBC2C1D12970093D449 /* newBackground4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFBB72C1D12960093D449 /* newBackground4.mp4 */; };
 		3A5AFBBD2C1D12970093D449 /* newBackground1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFBB82C1D12970093D449 /* newBackground1.mp4 */; };
 		3A5AFBBE2C1D12970093D449 /* newBackground2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFBB92C1D12970093D449 /* newBackground2.mp4 */; };
+		3A5AFBC32C2046850093D449 /* MeditationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFBC22C2046850093D449 /* MeditationObservable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +43,7 @@
 		3A5AFB7E2C1CA8490093D449 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3A5AFB802C1CA9090093D449 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		3A5AFB832C1CA9B20093D449 /* LargeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButtonView.swift; sourceTree = "<group>"; };
-		3A5AFB852C1CAC8B0093D449 /* EnergyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyCenterView.swift; sourceTree = "<group>"; };
+		3A5AFB852C1CAC8B0093D449 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3A5AFB892C1CB0C10093D449 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		3A5AFB8B2C1CB1780093D449 /* GapyeongHanseokbongL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GapyeongHanseokbongL.otf; sourceTree = "<group>"; };
 		3A5AFB8C2C1CB1780093D449 /* GapyeongHanseokbongB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GapyeongHanseokbongB.otf; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		3A5AFBB72C1D12960093D449 /* newBackground4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = newBackground4.mp4; path = ../../../../../Downloads/newBackground4.mp4; sourceTree = "<group>"; };
 		3A5AFBB82C1D12970093D449 /* newBackground1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = newBackground1.mp4; sourceTree = "<group>"; };
 		3A5AFBB92C1D12970093D449 /* newBackground2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = newBackground2.mp4; sourceTree = "<group>"; };
+		3A5AFBC22C2046850093D449 /* MeditationObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,10 +95,11 @@
 			isa = PBXGroup;
 			children = (
 				3A5AFB912C1CB19E0093D449 /* Info.plist */,
-				3A5AFB822C1CA9A30093D449 /* Common */,
-				3A5AFB7C2C1CA7F90093D449 /* Core */,
 				3A5AFB7B2C1CA7F50093D449 /* Model */,
 				3A5AFB7A2C1CA7F00093D449 /* View */,
+				3A5AFBC12C2046540093D449 /* Observable */,
+				3A5AFB822C1CA9A30093D449 /* Common */,
+				3A5AFB7C2C1CA7F90093D449 /* Core */,
 				3A5AFB7D2C1CA8040093D449 /* Resource */,
 				3A5AFB722C1CA6FE0093D449 /* Preview Content */,
 			);
@@ -115,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				3A5AFB7E2C1CA8490093D449 /* OnboardingView.swift */,
-				3A5AFB852C1CAC8B0093D449 /* EnergyCenterView.swift */,
+				3A5AFB852C1CAC8B0093D449 /* MainView.swift */,
 				3A5AFB9A2C1CE0CD0093D449 /* BackgroundVideoView.swift */,
 			);
 			path = View;
@@ -191,6 +194,14 @@
 				3A5AFBAF2C1D07660093D449 /* AudioPlayManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		3A5AFBC12C2046540093D449 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				3A5AFBC22C2046850093D449 /* MeditationObservable.swift */,
+			);
+			path = Observable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +286,7 @@
 			files = (
 				3A5AFB6D2C1CA6FD0093D449 /* ContentView.swift in Sources */,
 				3A5AFBB02C1D07660093D449 /* AudioPlayManager.swift in Sources */,
+				3A5AFBC32C2046850093D449 /* MeditationObservable.swift in Sources */,
 				3A5AFB8A2C1CB0C10093D449 /* Font+.swift in Sources */,
 				3A5AFB9B2C1CE0CD0093D449 /* BackgroundVideoView.swift in Sources */,
 				3A5AFB842C1CA9B20093D449 /* LargeButtonView.swift in Sources */,
@@ -282,7 +294,7 @@
 				3A5AFB7F2C1CA8490093D449 /* OnboardingView.swift in Sources */,
 				3A5AFB952C1CBC350093D449 /* WuxiaTime.swift in Sources */,
 				3A5AFB6B2C1CA6FD0093D449 /* WuxiaMeditationApp.swift in Sources */,
-				3A5AFB862C1CAC8B0093D449 /* EnergyCenterView.swift in Sources */,
+				3A5AFB862C1CAC8B0093D449 /* MainView.swift in Sources */,
 				3A5AFB932C1CBC190093D449 /* Date+.swift in Sources */,
 				3A5AFB972C1CBD5F0093D449 /* EneryState.swift in Sources */,
 			);
