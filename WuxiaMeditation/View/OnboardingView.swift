@@ -51,7 +51,8 @@ struct OnboardingView: View {
         .padding(16)
         .sheet(isPresented: $isShowChangeNotificationDate) {
             NotificationSelectDateView { firstTime, secondTime, thirdTime in
-                // set time
+                NotificationRequest.setNotifications(times: [firstTime, secondTime, thirdTime])
+                isShowChangeNotificationDate.toggle()
             }
             .presentationDetents([.medium])
         }

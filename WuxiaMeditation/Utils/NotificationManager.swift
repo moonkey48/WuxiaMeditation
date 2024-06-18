@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-final class NotificationManager {
-    func setNotifications(times: [Date]) {
-        
+struct NotificationRequest {
+    static func setNotifications(times: [Date]) {
+        // TODO: SetNotification
     }
 }

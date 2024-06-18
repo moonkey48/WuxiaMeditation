@@ -34,6 +34,7 @@
 		3A5AFBC32C2046850093D449 /* MeditationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFBC22C2046850093D449 /* MeditationObservable.swift */; };
 		3AF108AB2C20804100A956A1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AA2C20804100A956A1 /* NotificationManager.swift */; };
 		3AF108AD2C20809300A956A1 /* NotificationSelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */; };
+		3AF108AF2C21B9AF00A956A1 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AE2C21B9AF00A956A1 /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		3A5AFBC22C2046850093D449 /* MeditationObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationObservable.swift; sourceTree = "<group>"; };
 		3AF108AA2C20804100A956A1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSelectDateView.swift; sourceTree = "<group>"; };
+		3AF108AE2C21B9AF00A956A1 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */,
 				3A5AFB852C1CAC8B0093D449 /* MainView.swift */,
 				3A5AFB9A2C1CE0CD0093D449 /* BackgroundVideoView.swift */,
+				3AF108AE2C21B9AF00A956A1 /* SettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				3A5AFBC32C2046850093D449 /* MeditationObservable.swift in Sources */,
 				3A5AFB8A2C1CB0C10093D449 /* Font+.swift in Sources */,
 				3AF108AB2C20804100A956A1 /* NotificationManager.swift in Sources */,
+				3AF108AF2C21B9AF00A956A1 /* SettingView.swift in Sources */,
 				3A5AFB9B2C1CE0CD0093D449 /* BackgroundVideoView.swift in Sources */,
 				3A5AFB842C1CA9B20093D449 /* LargeButtonView.swift in Sources */,
 				3AF108AD2C20809300A956A1 /* NotificationSelectDateView.swift in Sources */,

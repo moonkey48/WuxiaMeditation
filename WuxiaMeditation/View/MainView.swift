@@ -11,27 +11,40 @@ struct MainView: View {
     @StateObject var observable = MeditationObservable()
     
     var body: some View {
-        VStack {
-            Text("運氣調息")
-                .font(.title3)
-                .foregroundStyle(.white)
-            Spacer()
-            switch observable.meditationState {
-            case .notStarted: EnergyCenterView(observable: observable)
-            case .progressing: MeditationView(observable: observable)
-            default: HStack { Spacer() }
-            }
-        }
-        .padding()
-        .onAppear {
-            observable.checkWuxiaTimeChanged()
-        }
-        .background {
-            PlayerView(energyState: $observable.energyState)
-                .ignoresSafeArea()
-                .onAppear {
-                    AudioPlayManager.shared.playSound(sound: "meditation")
+        NavigationStack {
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("運氣調息")
+                        .font(.title3)
+                        .foregroundStyle(.white)
+                    Spacer()
+                    NavigationLink {
+                        SettingView()
+                    } label: {
+                        Image(systemName: "aqi.medium")
+                            .foregroundStyle(.white)
+                            .imageScale(.large)
+                    }
                 }
+                Spacer()
+                switch observable.meditationState {
+                case .notStarted: EnergyCenterView(observable: observable)
+                case .progressing: MeditationView(observable: observable)
+                default: HStack { Spacer() }
+                }
+            }
+            .padding()
+            .onAppear {
+                observable.checkWuxiaTimeChanged()
+            }
+            .background {
+                PlayerView(energyState: $observable.energyState)
+                    .ignoresSafeArea()
+                    .onAppear {
+    //                    AudioPlayManager.shared.playSound(sound: "meditation")
+                    }
+            }
         }
     }
 }
