@@ -41,9 +41,6 @@ struct MainView: View {
             .background {
                 PlayerView(energyState: $observable.energyState)
                     .ignoresSafeArea()
-                    .onAppear {
-    //                    AudioPlayManager.shared.playSound(sound: "meditation")
-                    }
             }
         }
     }

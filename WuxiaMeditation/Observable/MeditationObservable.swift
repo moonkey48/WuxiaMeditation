@@ -27,6 +27,10 @@ class MeditationObservable: ObservableObject {
     @Published var timerCount: Int = 0
     @Published var meditationTimeRemaining: String = ""
     
+    init() {
+        AudioPlayManager.shared.playSound(sound: "meditation")
+    }
+    
     var isFinishedMeditation: Bool {
         standardMinute * 60 > timerCount ? false : true
     }

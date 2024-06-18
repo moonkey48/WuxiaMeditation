@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var notificationManager = NotificationManager()
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
     
     var body: some View {
-        if isOnboarding {
-            OnboardingView()
-        } else {
-            MainView()
+        Group {
+            if isOnboarding {
+                OnboardingView()
+            } else {
+                MainView()
+            }
         }
+        .environmentObject(notificationManager)
     }
 }
 

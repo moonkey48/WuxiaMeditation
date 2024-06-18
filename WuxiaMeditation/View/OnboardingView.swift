@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
+    @EnvironmentObject var notificationManager: NotificationManager
     @State private var isShowChangeNotificationDate = false
     
     var body: some View {
@@ -51,7 +52,8 @@ struct OnboardingView: View {
         .padding(16)
         .sheet(isPresented: $isShowChangeNotificationDate) {
             NotificationSelectDateView { firstTime, secondTime, thirdTime in
-                NotificationRequest.setNotifications(times: [firstTime, secondTime, thirdTime])
+                notificationManager.add
+//                NotificationRequest.setNotifications(times: [firstTime, secondTime, thirdTime])
                 isShowChangeNotificationDate.toggle()
             }
             .presentationDetents([.medium])
