@@ -11,6 +11,7 @@ struct OnboardingView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
     @EnvironmentObject var notificationManager: NotificationManager
     @State private var isShowChangeNotificationDate = false
+    @State private var dateList: [Date] = [Date(), Date(), Date()]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -51,11 +52,7 @@ struct OnboardingView: View {
         )
         .padding(16)
         .sheet(isPresented: $isShowChangeNotificationDate) {
-            NotificationSelectDateView { firstTime, secondTime, thirdTime in
-                notificationManager.add
-//                NotificationRequest.setNotifications(times: [firstTime, secondTime, thirdTime])
-                isShowChangeNotificationDate.toggle()
-            }
+            NotificationSelectDateView(dateList: $dateList, isShowChangeNotificationDate: $isShowChangeNotificationDate)
             .presentationDetents([.medium])
         }
     }

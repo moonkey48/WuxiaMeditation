@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct NotificationSelectDateView: View {
-    @State private var firstTime = Date()
-    @State private var secondTime = Date()
-    @State private var thirdTime = Date()
-    var completion: ((_ firstTime: Date, _ secondTime: Date, _ thirdTime: Date) -> Void)
+    @Binding var dateList: [Date]
+    @Binding var isShowChangeNotificationDate: Bool
+    
+    private func meditationIndexDescription(_ index: Int) -> String {
+        if index == 0 { return "첫번째" }
+        else if index == 1 { return "두번째" }
+        else if index == 2 { return "세번째" }
+        return ""
+    }
+    
     
     var body: some View {
         VStack(spacing: 30) {
-            DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
-            DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
-            DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
+            ForEach(dateList.indices, id: \.self) { index in
+                DatePicker("\(meditationIndexDescription(index)) 운기조식", selection: $dateList[index], displayedComponents: [.hourAndMinute])
+            }
             Spacer()
             LargeButtonView(title: "완료") {
-                completion(firstTime, secondTime, thirdTime)
+                isShowChangeNotificationDate = false
             }
         }
         .font(.customTitle3)
@@ -36,7 +42,5 @@ struct NotificationSelectDateView: View {
 
 
 #Preview {
-    NotificationSelectDateView { f, s, l in
-        
-    }
+    NotificationSelectDateView(dateList: .constant([]), isShowChangeNotificationDate: .constant(true))
 }

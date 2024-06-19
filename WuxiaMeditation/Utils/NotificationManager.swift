@@ -17,11 +17,7 @@ struct Notification {
 class NotificationManager: ObservableObject {
     @Published var notifications = [Notification]()
     
-    static func setNotifications(times: [Date]) {
-        // TODO: SetNotification
-    }
-    
-    func requestPermission() -> Void {
+    private func requestPermission() -> Void {
         UNUserNotificationCenter
             .current()
             .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
@@ -31,9 +27,9 @@ class NotificationManager: ObservableObject {
             }
     }
     
-    func addNotification(date: Date) -> Void {
-        // TODO: change date to WuxiaTime
-        notifications.append(Notification(date: date))
+    func sendNotification(dateList: [Date]) -> Void {
+        for date in dateList { notifications.append(Notification(date: date)) }
+        schedule()
     }
     
     func schedule() -> Void {
