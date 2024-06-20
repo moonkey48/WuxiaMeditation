@@ -13,7 +13,7 @@ enum MeditationState {
     case progressing
 }
 
-let standardMinute: Int = 1
+let standardMinute: Int = 10
 
 class MeditationObservable: ObservableObject {
     @Published var meditationState: MeditationState = .notStarted
@@ -28,7 +28,7 @@ class MeditationObservable: ObservableObject {
     @Published var meditationTimeRemaining: String = ""
     
     init() {
-        AudioPlayManager.shared.playSound(sound: "meditation")
+//        AudioPlayManager.shared.playSound(sound: "meditation")
     }
     
     var isFinishedMeditation: Bool {

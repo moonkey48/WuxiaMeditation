@@ -17,14 +17,17 @@ struct Notification {
 class NotificationManager: ObservableObject {
     @Published var notifications = [Notification]()
     
-    private func requestPermission() -> Void {
-        UNUserNotificationCenter
-            .current()
-            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
-                if granted == true && error == nil {
-                    //we have permission!
-                }
+    init() {
+        requestPermission()
+    }
+    
+    private func requestPermission(){
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
+            if granted {
+                print("notification 설정 완료")
             }
+        })
     }
     
     func sendNotification(dateList: [Date]) -> Void {
@@ -40,7 +43,7 @@ class NotificationManager: ObservableObject {
             case .authorized, .provisional:
                 self.scheduleNotifications()
             default:
-                break
+                self.requestPermission()
             }
         }
     }
@@ -50,16 +53,16 @@ class NotificationManager: ObservableObject {
             //🗓️ 날짜 설정
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current
-            dateComponents.weekday = 4 // Wednesday
-            dateComponents.hour = 19 // 14:00
+            dateComponents.hour = Calendar.current.component(.hour, from: notification.date)
+            dateComponents.minute = Calendar.current.component(.minute, from: notification.date)
+            print(Calendar.current.component(.hour, from: notification.date))
+
             
             let content = UNMutableNotificationContent()
             content.title = "\(notification.date.wuxiaTime.timeDescription)입니다."
-            content.sound = UNNotificationSound.default
+            content.sound = UNNotificationSound.defaultRingtone
             content.subtitle = "운기조식하실 시간입니다."
-//            content.body = "먹었다고 체크하기"
-//            content.summaryArgument = "summary argument"
-//            content.summaryArgumentCount = 40
+            
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
