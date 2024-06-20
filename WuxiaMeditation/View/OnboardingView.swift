@@ -12,7 +12,10 @@ struct OnboardingView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
     @EnvironmentObject var notificationManager: NotificationManager
     @State private var isShowChangeNotificationDate = false
-    @State private var dateList: [Date] = [Date(), Date(), Date()]
+    @State private var dateList: [Date] = []
+    @AppStorage("firstTimeString") var firstTimeString: String = "07:30"
+    @AppStorage("secondTimeString") var secondTimeString: String = "18:00"
+    @AppStorage("thirdTimeString") var thirdTimeString: String = "23:00"
     
     var body: some View {
         VStack(spacing: 0) {
@@ -42,6 +45,9 @@ struct OnboardingView: View {
             
             LargeButtonView(title: "시작") {
                 notificationManager.sendNotification(dateList: dateList)
+                for date in dateList {
+                    print(date.hourAndMinute)
+                }
                 withAnimation {
                     isOnboarding = false
                 }
@@ -56,6 +62,25 @@ struct OnboardingView: View {
             NotificationSelectDateView(dateList: $dateList, isShowChangeNotificationDate: $isShowChangeNotificationDate)
             .presentationDetents([.medium])
         }
+        .onAppear {
+            setDateFromUserDefaults()
+        }
+    }
+    
+    func setDateFromUserDefaults() {
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "HH:mm"
+        var newDateList: [Date] = []
+        if let firstTime = dateFormmater.date(from: firstTimeString) {
+            newDateList.append(firstTime)
+        }
+        if let secondTime = dateFormmater.date(from: secondTimeString) {
+            newDateList.append(secondTime)
+        }
+        if let thirdTime = dateFormmater.date(from: thirdTimeString) {
+            newDateList.append(thirdTime)
+        }
+        dateList = newDateList
     }
 }
 

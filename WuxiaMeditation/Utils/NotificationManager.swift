@@ -11,7 +11,6 @@ import UserNotifications
 struct Notification {
     var id: String = UUID().uuidString
     var date: Date
-    
 }
 
 class NotificationManager: ObservableObject {
@@ -24,9 +23,6 @@ class NotificationManager: ObservableObject {
     private func requestPermission(){
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
-            if granted {
-                print("notification 설정 완료")
-            }
         })
     }
     
@@ -50,7 +46,6 @@ class NotificationManager: ObservableObject {
     
     func scheduleNotifications() -> Void {
         for notification in notifications {
-            //🗓️ 날짜 설정
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current
             dateComponents.hour = Calendar.current.component(.hour, from: notification.date)
@@ -63,14 +58,17 @@ class NotificationManager: ObservableObject {
             content.sound = UNNotificationSound.defaultRingtone
             content.subtitle = "운기조식하실 시간입니다."
             
-            
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request) { error in
                 guard error == nil else { return }
-                print("scheduling notification with id:\(notification.id)")
             }
         }
+    }
+    
+    func reScheduleNotifications(_ dateList: [Date]) {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        sendNotification(dateList: dateList)
     }
 }

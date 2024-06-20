@@ -19,4 +19,10 @@ extension Date {
         }
         return .state0
     }
+    
+    var hourAndMinute: String {
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "HH:mm"
+        return dateFormmater.string(from: self)
+    }
 }

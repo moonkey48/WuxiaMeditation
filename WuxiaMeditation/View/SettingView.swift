@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @State private var isEditMode = false
     @State private var firstTime = Date()
     @State private var secondTime = Date()
     @State private var thirdTime = Date()
@@ -29,10 +30,24 @@ struct SettingView: View {
             Image(.background)
                 .ignoresSafeArea()
         )
+        .toolbar {
+            Button {
+                isEditMode.toggle()
+            } label: {
+                if isEditMode {
+                    Text("저장")
+                } else {
+                    Text("수정")
+                }
+            }
+        }
         .padding()
+        .tint(.white)
     }
 }
 
 #Preview {
-    SettingView()
+    NavigationStack {
+        SettingView()
+    }
 }
