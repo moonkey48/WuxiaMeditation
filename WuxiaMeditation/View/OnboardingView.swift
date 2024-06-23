@@ -82,6 +82,14 @@ struct OnboardingView: View {
         }
         dateList = newDateList
     }
+    
+    func setUserDefaultsFromDates() {
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "HH:mm"
+        firstTimeString = dateFormmater.string(from: dateList[0])
+        secondTimeString = dateFormmater.string(from: dateList[1])
+        thirdTimeString = dateFormmater.string(from: dateList[2])
+    }
 }
 
 #Preview {
