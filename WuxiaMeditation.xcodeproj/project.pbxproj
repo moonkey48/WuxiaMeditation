@@ -68,7 +68,6 @@
 		3AF108AA2C20804100A956A1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSelectDateView.swift; sourceTree = "<group>"; };
 		3AF108AE2C21B9AF00A956A1 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		3AF108B02C22E80700A956A1 /* 운기조식.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "운기조식.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +84,6 @@
 		3A5AFB5E2C1CA6FD0093D449 = {
 			isa = PBXGroup;
 			children = (
-				3AF108B02C22E80700A956A1 /* 운기조식.entitlements */,
 				3A5AFB692C1CA6FD0093D449 /* WuxiaMeditation */,
 				3A5AFB682C1CA6FD0093D449 /* Products */,
 			);
