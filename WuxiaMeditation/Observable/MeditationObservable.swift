@@ -13,9 +13,11 @@ enum MeditationState {
     case progressing
 }
 
-let standardMinute: Int = 10
+extension MeditationState {
+    static let standardMinute: Int = 10
+}
 
-class MeditationObservable: ObservableObject {
+final class MeditationObservable: ObservableObject {
     @Published var meditationState: MeditationState = .notStarted
     
     @Published var isMeditationDoneOnTime = false
@@ -23,7 +25,7 @@ class MeditationObservable: ObservableObject {
     @Published var currentWuxiaTime: WuxiaTime = Date().wuxiaTime
     @Published var meditationSentence: MeditationSentence = dummyMeditationSentenceList[0]
     @Published var isShowEndMeditationAlert = false
-    @Published var futureData: Date = Calendar.current.date(byAdding: .minute, value: standardMinute, to: Date()) ?? Date()
+    @Published var futureData: Date = Calendar.current.date(byAdding: .minute, value: MeditationState.standardMinute, to: Date()) ?? Date()
     @Published var timerCount: Int = 0
     @Published var meditationTimeRemaining: String = ""
     
@@ -32,7 +34,7 @@ class MeditationObservable: ObservableObject {
     }
     
     var isFinishedMeditation: Bool {
-        standardMinute * 60 > timerCount ? false : true
+        MeditationState.standardMinute * 60 > timerCount ? false : true
     }
 }
 
@@ -48,7 +50,7 @@ extension MeditationObservable {
     
     func setMeditationStarted() {
         withAnimation {
-            futureData = Calendar.current.date(byAdding: .minute, value: standardMinute, to: Date()) ?? Date()
+            futureData = Calendar.current.date(byAdding: .minute, value: MeditationState.standardMinute, to: Date()) ?? Date()
             updateTimeRemaining()
             timerCount = 0
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -85,9 +87,9 @@ extension MeditationObservable {
     }
     
     private func calculateEnergyLevel() {
-        if timerCount > standardMinute * 60 / 2 {
+        if timerCount > MeditationState.standardMinute * 60 / 2 {
             energyState = EnergyState(rawValue: energyState.rawValue - 1 >= 0 ? energyState.rawValue - 1  : 0) ?? energyState
-        } else if timerCount > standardMinute * 60 {
+        } else if timerCount > MeditationState.standardMinute * 60 {
             if energyState.rawValue - 2 >= 0 {
                 energyState = EnergyState(rawValue: energyState.rawValue - 2) ?? energyState
             } else if energyState.rawValue - 1 >= 0 {
