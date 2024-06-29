@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var observable = MeditationObservable()
+    @State private var observable: MeditationObservable = MeditationObservable()
     
     var body: some View {
-        NavigationStack {
+        ZStack {
+            PlayerView(energyState: $observable.energyState)
+                .ignoresSafeArea()
             VStack {
                 HStack {
                     Spacer()
@@ -38,16 +40,13 @@ struct MainView: View {
             .onAppear {
                 observable.checkWuxiaTimeChanged()
             }
-            .background {
-                PlayerView(energyState: $observable.energyState)
-                    .ignoresSafeArea()
-            }
+            
         }
     }
 }
 
 struct EnergyCenterView: View {
-    @ObservedObject var observable: MeditationObservable
+    var observable: MeditationObservable
     
     var body: some View {
         Text(observable.isMeditationDoneOnTime ? observable.currentWuxiaTime.titleDescriptionAfterMeditation : observable.currentWuxiaTime.titleDescriptionBeforeMeditation)
@@ -69,7 +68,7 @@ struct EnergyCenterView: View {
 }
 
 struct MeditationView: View {
-    @ObservedObject var observable: MeditationObservable
+    @Bindable var observable: MeditationObservable
     
     var body: some View {
         VStack(spacing: 20) {
