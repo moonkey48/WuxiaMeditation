@@ -26,24 +26,30 @@ struct SettingView: View {
                 .padding(.vertical, 24)
             if isEditMode {
                 DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
+                    .frame(height: 50)
                 DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
+                    .frame(height: 50)
                 DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
+                    .frame(height: 50)
             } else {
                 HStack {
                     Text("첫번째 운기조식")
                     Spacer()
                     Text(firstTime.hourAndMinute)
                 }
+                .frame(height: 50)
                 HStack {
                     Text("두번째 운기조식")
                     Spacer()
                     Text(secondTime.hourAndMinute)
                 }
+                .frame(height: 50)
                 HStack {
                     Text("세번째 운기조식")
                     Spacer()
                     Text(thirdTime.hourAndMinute)
                 }
+                .frame(height: 50)
             }
             Spacer()
         }
@@ -81,7 +87,6 @@ struct SettingView: View {
             }
         }
         .padding()
-        .tint(.white)
         .onAppear {
             setDateFromUserDefaults()
         }

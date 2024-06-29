@@ -8,46 +8,48 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var observable = MeditationObservable()
+    @State private var observable: MeditationObservable = MeditationObservable()
     
     var body: some View {
         NavigationStack {
-            VStack {
-                HStack {
-                    Spacer()
-                    Text("運氣調息")
-                        .font(.title3)
-                        .foregroundStyle(.white)
-                    Spacer()
-                    NavigationLink {
-                        SettingView()
-                    } label: {
-                        Image(systemName: "aqi.medium")
-                            .foregroundStyle(.white)
-                            .imageScale(.large)
-                    }
-                }
-                Spacer()
-                switch observable.meditationState {
-                case .notStarted: EnergyCenterView(observable: observable)
-                case .progressing: MeditationView(observable: observable)
-                default: HStack { Spacer() }
-                }
-            }
-            .padding()
-            .onAppear {
-                observable.checkWuxiaTimeChanged()
-            }
-            .background {
+            ZStack {
                 PlayerView(energyState: $observable.energyState)
                     .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("運氣調息")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                        Spacer()
+                        NavigationLink {
+                            SettingView()
+                        } label: {
+                            Image(systemName: "aqi.medium")
+                                .foregroundStyle(.white)
+                                .imageScale(.large)
+                        }
+                    }
+                    Spacer()
+                    switch observable.meditationState {
+                    case .notStarted: EnergyCenterView(observable: observable)
+                    case .progressing: MeditationView(observable: observable)
+                    default: HStack { Spacer() }
+                    }
+                }
+                .padding()
+                .onAppear {
+                    observable.checkWuxiaTimeChanged()
+                }
+                
             }
         }
+        .tint(.primaryGreen)
     }
 }
 
 struct EnergyCenterView: View {
-    @ObservedObject var observable: MeditationObservable
+    var observable: MeditationObservable
     
     var body: some View {
         Text(observable.isMeditationDoneOnTime ? observable.currentWuxiaTime.titleDescriptionAfterMeditation : observable.currentWuxiaTime.titleDescriptionBeforeMeditation)
@@ -69,7 +71,7 @@ struct EnergyCenterView: View {
 }
 
 struct MeditationView: View {
-    @ObservedObject var observable: MeditationObservable
+    @Bindable var observable: MeditationObservable
     
     var body: some View {
         VStack(spacing: 20) {

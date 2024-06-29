@@ -53,11 +53,11 @@ struct OnboardingView: View {
                 }
             }
         }
-        .background(
-            Image(.background)
-                .ignoresSafeArea(edges: .top)
-        )
         .padding(16)
+        .background(
+            PlayerView(energyState: .constant(.level0))
+                .ignoresSafeArea()
+        )
         .sheet(isPresented: $isShowChangeNotificationDate) {
             NotificationSelectDateView(dateList: $dateList, isShowChangeNotificationDate: $isShowChangeNotificationDate)
             .presentationDetents([.medium])
