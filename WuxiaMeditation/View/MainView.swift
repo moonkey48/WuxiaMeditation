@@ -11,37 +11,40 @@ struct MainView: View {
     @State private var observable: MeditationObservable = MeditationObservable()
     
     var body: some View {
-        ZStack {
-            PlayerView(energyState: $observable.energyState)
-                .ignoresSafeArea()
-            VStack {
-                HStack {
-                    Spacer()
-                    Text("運氣調息")
-                        .font(.title3)
-                        .foregroundStyle(.white)
-                    Spacer()
-                    NavigationLink {
-                        SettingView()
-                    } label: {
-                        Image(systemName: "aqi.medium")
+        NavigationStack {
+            ZStack {
+                PlayerView(energyState: $observable.energyState)
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("運氣調息")
+                            .font(.title3)
                             .foregroundStyle(.white)
-                            .imageScale(.large)
+                        Spacer()
+                        NavigationLink {
+                            SettingView()
+                        } label: {
+                            Image(systemName: "aqi.medium")
+                                .foregroundStyle(.white)
+                                .imageScale(.large)
+                        }
+                    }
+                    Spacer()
+                    switch observable.meditationState {
+                    case .notStarted: EnergyCenterView(observable: observable)
+                    case .progressing: MeditationView(observable: observable)
+                    default: HStack { Spacer() }
                     }
                 }
-                Spacer()
-                switch observable.meditationState {
-                case .notStarted: EnergyCenterView(observable: observable)
-                case .progressing: MeditationView(observable: observable)
-                default: HStack { Spacer() }
+                .padding()
+                .onAppear {
+                    observable.checkWuxiaTimeChanged()
                 }
+                
             }
-            .padding()
-            .onAppear {
-                observable.checkWuxiaTimeChanged()
-            }
-            
         }
+        .tint(.primaryGreen)
     }
 }
 
