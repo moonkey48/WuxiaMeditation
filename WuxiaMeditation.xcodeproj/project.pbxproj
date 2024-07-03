@@ -38,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A5AFB672C1CA6FD0093D449 /* WuxiaMeditaion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WuxiaMeditaion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A5AFB672C1CA6FD0093D449 /* WuxiaMeditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WuxiaMeditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5AFB6A2C1CA6FD0093D449 /* WuxiaMeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WuxiaMeditationApp.swift; sourceTree = "<group>"; };
 		3A5AFB6C2C1CA6FD0093D449 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3A5AFB702C1CA6FE0093D449 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		3A5AFB682C1CA6FD0093D449 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A5AFB672C1CA6FD0093D449 /* WuxiaMeditaion.app */,
+				3A5AFB672C1CA6FD0093D449 /* WuxiaMeditation.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,7 +238,7 @@
 			);
 			name = "운기조식";
 			productName = WuxiaMeditation;
-			productReference = 3A5AFB672C1CA6FD0093D449 /* WuxiaMeditaion.app */;
+			productReference = 3A5AFB672C1CA6FD0093D449 /* WuxiaMeditation.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -466,7 +466,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austin.WuxiaMeditation;
-				PRODUCT_NAME = WuxiaMeditaion;
+				PRODUCT_NAME = WuxiaMeditation;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -501,7 +501,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.austin.WuxiaMeditation;
-				PRODUCT_NAME = WuxiaMeditaion;
+				PRODUCT_NAME = WuxiaMeditation;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
