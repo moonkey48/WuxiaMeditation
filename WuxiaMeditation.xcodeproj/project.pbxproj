@@ -32,6 +32,7 @@
 		3A5AFBBD2C1D12970093D449 /* newBackground1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFBB82C1D12970093D449 /* newBackground1.mp4 */; };
 		3A5AFBBE2C1D12970093D449 /* newBackground2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFBB92C1D12970093D449 /* newBackground2.mp4 */; };
 		3A5AFBC32C2046850093D449 /* MeditationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFBC22C2046850093D449 /* MeditationObservable.swift */; };
+		3A6D29642C4007A300C1BD41 /* GrainGradient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D29632C4007A300C1BD41 /* GrainGradient.metal */; };
 		3AF108AB2C20804100A956A1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AA2C20804100A956A1 /* NotificationManager.swift */; };
 		3AF108AD2C20809300A956A1 /* NotificationSelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */; };
 		3AF108AF2C21B9AF00A956A1 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AE2C21B9AF00A956A1 /* SettingView.swift */; };
@@ -65,6 +66,7 @@
 		3A5AFBB82C1D12970093D449 /* newBackground1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = newBackground1.mp4; sourceTree = "<group>"; };
 		3A5AFBB92C1D12970093D449 /* newBackground2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = newBackground2.mp4; sourceTree = "<group>"; };
 		3A5AFBC22C2046850093D449 /* MeditationObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationObservable.swift; sourceTree = "<group>"; };
+		3A6D29632C4007A300C1BD41 /* GrainGradient.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = GrainGradient.metal; sourceTree = "<group>"; };
 		3AF108AA2C20804100A956A1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSelectDateView.swift; sourceTree = "<group>"; };
 		3AF108AE2C21B9AF00A956A1 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 		3A5AFB822C1CA9A30093D449 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3A6D29622C40079400C1BD41 /* Shader */,
 				3A5AFBAE2C1D07550093D449 /* Manager */,
 				3A5AFB882C1CB0B50093D449 /* Extension */,
 				3A5AFB872C1CB0A70093D449 /* Components */,
@@ -211,6 +214,14 @@
 				3A5AFBC22C2046850093D449 /* MeditationObservable.swift */,
 			);
 			path = Observable;
+			sourceTree = "<group>";
+		};
+		3A6D29622C40079400C1BD41 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				3A6D29632C4007A300C1BD41 /* GrainGradient.metal */,
+			);
+			path = Shader;
 			sourceTree = "<group>";
 		};
 		3AF108A92C20803300A956A1 /* Utils */ = {
@@ -307,6 +318,7 @@
 				3A5AFB8A2C1CB0C10093D449 /* Font+.swift in Sources */,
 				3AF108AB2C20804100A956A1 /* NotificationManager.swift in Sources */,
 				3AF108AF2C21B9AF00A956A1 /* SettingView.swift in Sources */,
+				3A6D29642C4007A300C1BD41 /* GrainGradient.metal in Sources */,
 				3A5AFB9B2C1CE0CD0093D449 /* BackgroundVideoView.swift in Sources */,
 				3A5AFB842C1CA9B20093D449 /* LargeButtonView.swift in Sources */,
 				3AF108AD2C20809300A956A1 /* NotificationSelectDateView.swift in Sources */,
