@@ -9,12 +9,17 @@ import SwiftUI
 
 struct MainView: View {
     @State private var observable: MeditationObservable = MeditationObservable()
+    @State private var startTime = Date.now
     
     var body: some View {
         NavigationStack {
+            let elapsedTime = startTime.distance(to: Date.now)
             ZStack {
                 PlayerView(energyState: $observable.energyState)
                     .ignoresSafeArea()
+                Rectangle()
+                    .fill(.grainGradient(time: elapsedTime))
+                    .frame(width: 300, height: 300)
                 VStack {
                     HStack {
                         Spacer()
