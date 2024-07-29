@@ -31,7 +31,7 @@ final class MeditationObservable {
     var meditationTimeRemaining: String = ""
     
     init() {
-        AudioPlayManager.shared.playSound(sound: "meditation")
+//        AudioPlayManager.shared.playSound(sound: "meditation")
     }
     
     var isFinishedMeditation: Bool {

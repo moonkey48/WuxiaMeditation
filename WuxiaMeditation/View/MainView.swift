@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @State private var observable: MeditationObservable = MeditationObservable()
     @State private var startTime = Date.now
+    @State private var time: Float = 0
     
     var body: some View {
         NavigationStack {
@@ -18,8 +19,10 @@ struct MainView: View {
                 PlayerView(energyState: $observable.energyState)
                     .ignoresSafeArea()
                 Rectangle()
-                    .fill(.grainGradient(time: elapsedTime))
-                    .frame(width: 300, height: 300)
+//                    .fill(.grainGradient2(time: elapsedTime))
+                    .fill(.grainGradient4(time: time))
+//                    .frame(width: 300, height: 300)
+                    .ignoresSafeArea()
                 VStack {
                     HStack {
                         Spacer()
@@ -45,11 +48,26 @@ struct MainView: View {
                 .padding()
                 .onAppear {
                     observable.checkWuxiaTimeChanged()
+                    DispatchQueue.global().async() {
+                        guard let url = URL(string: "https://api.adviceslip.com/advice") else {
+                                print("error")
+                                return
+                            }
+                            
+                            URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
+                                print(data)
+                            }.resume()
+                    }
                 }
                 
             }
         }
         .tint(.primaryGreen)
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
+                time += 0.1
+            }
+        }
     }
 }
 
