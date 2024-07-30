@@ -13,6 +13,7 @@ struct OnboardingView: View {
     @EnvironmentObject var notificationManager: NotificationManager
     @State private var isShowChangeNotificationDate = false
     @State private var dateList: [Date] = []
+    @State private var animationTime: Float = 0
     @AppStorage("firstTimeString") var firstTimeString: String = "07:30"
     @AppStorage("secondTimeString") var secondTimeString: String = "18:00"
     @AppStorage("thirdTimeString") var thirdTimeString: String = "23:00"
@@ -55,7 +56,8 @@ struct OnboardingView: View {
         }
         .padding(16)
         .background(
-            PlayerView(energyState: .constant(.level0))
+            Rectangle()
+                .fill(.circleMotionWithBackground(time: animationTime, secondTime: animationTime))
                 .ignoresSafeArea()
         )
         .sheet(isPresented: $isShowChangeNotificationDate) {
@@ -64,6 +66,9 @@ struct OnboardingView: View {
         }
         .onAppear {
             setDateFromUserDefaults()
+            Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                self.animationTime += 0.1
+            }
         }
     }
     
