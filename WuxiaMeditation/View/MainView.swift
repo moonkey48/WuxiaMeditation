@@ -18,6 +18,9 @@ struct MainView: View {
                     .ignoresSafeArea()
                 VStack {
                     HStack {
+                        Image(systemName: "aqi.medium")
+                            .imageScale(.large)
+                            .foregroundStyle(.clear)
                         Spacer()
                         Text("運氣調息")
                             .font(.title3)
