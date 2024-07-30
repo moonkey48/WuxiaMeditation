@@ -65,48 +65,82 @@ float easeInOut(float t) {
     return t < 0.5 ? 4.0 * t * t * t : 1.0 - pow(-2.0 * t + 2.0, 3.0) / 2.0;
 }
 
+float noise(float2 st) {
+    float2 i = floor(st);
+    float2 f = fract(st);
+    float a = fract(sin(dot(i, float2(12.9898, 78.233))) * 43758.5453);
+    float b = fract(sin(dot(i + float2(1.0, 0.0), float2(12.9898, 78.233))) * 43758.5453);
+    float c = fract(sin(dot(i + float2(0.0, 1.0), float2(12.9898, 78.233))) * 43758.5453);
+    float d = fract(sin(dot(i + float2(1.0, 1.0), float2(12.9898, 78.233))) * 43758.5453);
+    f = smoothstep(0.0, 1.0, f);
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+float smoothNoise(float2 st) {
+    float2 i = floor(st);
+    float2 f = fract(st);
+    float2 u = f * f * (3.0 - 2.0 * f);
+    return mix(mix(noise(i + float2(0.0, 0.0)),
+                   noise(i + float2(1.0, 0.0)), u.x),
+               mix(noise(i + float2(0.0, 1.0)),
+                   noise(i + float2(1.0, 1.0)), u.x), u.y);
+}
+
 [[ stitchable ]]
-half4 circleMotion(float2 position, float4 bounds, float size, float time) {
+half4 circleMotionWithBackground(float2 position, float4 bounds, float size, float time, float secondTime) {
     float2 center = bounds.zw / 2.0;
     float2 pos = position - center;
     
     float maxRadius = min(bounds.z, bounds.w) / 2.0;
     float minRadius = maxRadius / 4.0;
     
-    // 시간에 따른 반지름 계산
-    float cycleTime = 15.0; // 전체 사이클 시간 (5 + 3 + 5 + 2 = 15초)
-    float t = fmod(time, cycleTime);
+    float cycleTime = 15.0;
+    float t = fmod(secondTime, cycleTime);
     float radius;
     
-    
     if (t < 5.0) {
-        // 5초 동안 커짐
-        float progress = easeInOut(t / 5.0);
-        radius = mix(minRadius, maxRadius, progress);
-    } else if (t < 8.0) {
-        // 3초 동안 최대 크기 유지
         radius = maxRadius;
-    } else if (t < 13.0) {
-        // 5초 동안 작아짐
-        float progress = easeInOut((t - 8.0) / 5.0);
+    } else if (t < 10.0) {
+        float progress = smoothstep(0.0, 1.0, (t - 5.0) / 5.0);
         radius = mix(maxRadius, minRadius, progress);
-    } else {
-        // 2초 동안 최소 크기 유지
+    } else if (t < 13.0) {
         radius = minRadius;
+    } else {
+        float progress = smoothstep(0.0, 1.0, (t - 13.0) / 2.0);
+        radius = mix(minRadius, maxRadius, progress);
     }
+    
+    float angle = atan2(pos.y, pos.x);
+    float slowTime = time / 5.0; // Slower time for smoother movement
+    
+    // Use smoothNoise for a more continuous, less "broken" effect
+    float noiseValue = smoothNoise(float2(angle * 3.0 + slowTime, slowTime * 0.5));
+    float edgeNoise = noiseValue * 0.15 + 0.85; // Reduced noise influence
+    
+    float edgeRadius = radius * edgeNoise;
     
     float distFromCenter = length(pos);
     
-    half4 greenColor = half4(0.0, 1.0, 0.0, 1.0);
-    half4 beigeColor = half4(0.96, 0.96, 0.86, 1.0);
+    half4 greenColor = half4(149.0/255.0, 178.0/255.0, 150.0/255.0, 1.0);
+    half4 beigeColor = half4(240.0/255.0, 224.0/255.0, 188.0/255.0, 1.0);
     
-    float smoothWidth = 2.0;
-    half4 color = mix(greenColor, beigeColor, smoothstep(radius - smoothWidth, radius + smoothWidth, distFromCenter));
+    float smoothWidth = maxRadius / 3.0;
+    half4 color = mix(greenColor, beigeColor, smoothstep(edgeRadius - smoothWidth, edgeRadius + smoothWidth, distFromCenter));
     
+    // Softer edge effect
+    float edgeWidth = smoothWidth * 8.0;
+    float edgeGap = smoothWidth * 3.0;
+    float edgeEffect = smoothstep(edgeRadius + edgeGap, edgeRadius + edgeGap + edgeWidth * 0.5, distFromCenter) *
+                       (1.0 - smoothstep(edgeRadius + edgeGap + edgeWidth * 0.5, edgeRadius + edgeGap + edgeWidth, distFromCenter));
+    color = mix(color, greenColor, edgeEffect * 0.4);
+    
+    // Grain effect
     float2 coords = position / bounds.zw;
-    float strength = 0.05;
+    float strength = 0.02;
     float x = (coords.x + 4.0) * (coords.y + 4.0) * 10.0;
-    float4 grain = float4(fmod((fmod(x, 13.0) + 1.0) * (fmod(x, 123.0) + 1.0), 0.01)-0.005) * strength;
+    float grain = fract((fract(x * 13.0) + 1.0) * (fract(x * 123.0) + 1.0)) * 0.01 - 0.005;
     
-    return color + half4(grain);
+    color.rgb += half3(grain, grain, grain) * strength;
+    
+    return color;
 }

@@ -9,31 +9,27 @@ import SwiftUI
 
 struct MainView: View {
     @State private var observable: MeditationObservable = MeditationObservable()
-    @State private var time: Float = 0
     
     var body: some View {
         NavigationStack {
             ZStack {
-                PlayerView(energyState: $observable.energyState)
-                    .ignoresSafeArea()
                 Rectangle()
-                    .fill(.circleMotion(time: time))
+                    .fill(.circleMotionWithBackground(time: observable.time, secondTime: observable.secondTime))
                     .ignoresSafeArea()
                 VStack {
                     HStack {
                         Spacer()
                         Text("運氣調息")
                             .font(.title3)
-                            .foregroundStyle(.white)
                         Spacer()
                         NavigationLink {
                             SettingView()
                         } label: {
                             Image(systemName: "aqi.medium")
-                                .foregroundStyle(.white)
                                 .imageScale(.large)
                         }
                     }
+                    .foregroundStyle(.primaryGreen)
                     Spacer()
                     switch observable.meditationState {
                     case .notStarted: EnergyCenterView(observable: observable)
@@ -49,11 +45,6 @@ struct MainView: View {
             }
         }
         .tint(.primaryGreen)
-        .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-                time += 0.1
-            }
-        }
     }
 }
 
@@ -69,7 +60,7 @@ struct EnergyCenterView: View {
         Spacer()
         Text(observable.energyState.description)
             .font(.customBody)
-            .foregroundStyle(.white)
+            .foregroundStyle(.primaryGreen)
             .multilineTextAlignment(.center)
             .lineSpacing(4.0)
             .padding(.bottom, 40)
@@ -83,23 +74,18 @@ struct MeditationView: View {
     @Bindable var observable: MeditationObservable
     
     var body: some View {
+        Spacer()
         VStack(spacing: 20) {
             Text(observable.meditationSentence.sentence)
                 .font(.customTitle3)
             Text(observable.meditationSentence.author)
                 .font(.customCaption)
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(.primaryGreen)
         .multilineTextAlignment(.center)
         .lineSpacing(6.0)
+        .padding(.bottom, 40)
         
-        Spacer()
-        Text("일다경동안 운기조식을 합니다.")
-            .font(.customBody)
-            .foregroundStyle(.white)
-            .multilineTextAlignment(.center)
-            .lineSpacing(4.0)
-            .padding(.bottom, 40)
         LargeButtonView(title: observable.isFinishedMeditation ? "운기조식 종료" : "\(observable.meditationTimeRemaining) 뒤 종료", color: .white.opacity(observable.isFinishedMeditation ? 1 : 0.5), energyState: observable.energyState) {
             observable.isShowEndMeditationAlert = true
         }
@@ -109,7 +95,7 @@ struct MeditationView: View {
                 primaryButton:
                         .destructive(Text("종료"), action: {
                             observable.setMeditationEnded()
-                }),
+                        }),
                 secondaryButton: .cancel(Text("취소")))
         }
     }
