@@ -24,37 +24,10 @@ private let br = Color("bottom_right")
 // MARK: - Grainy gradient
 
 extension ShapeStyle where Self == AnyShapeStyle {
-    static func grainGradient(time: TimeInterval, gridSize: Int = 3) -> Self {
-        return AnyShapeStyle(ShaderLibrary.default.grainGradient(
+    static func circleMotion(time: Float, gridSize: Int = 3) -> Self {
+        return AnyShapeStyle(ShaderLibrary.default.circleMotion(
             .boundingRect,
             .float(3),
-            .float(time),
-            .colorArray([tl, tc, tr,
-                         ml, mc, mr,
-                         bl, bc, br])
-        ))
-    }
-    static func grainGradient2(time: TimeInterval, gridSize: Int = 3) -> Self {
-        return AnyShapeStyle(ShaderLibrary.default.grainGradient2(
-            .boundingRect,
-            .float(3),
-            .float(time),
-            .colorArray([tl, tc, tr,
-                         ml, mc, mr,
-                         bl, bc, br])
-        ))
-    }
-    static func grainGradient3(time: Float, gridSize: Int = 3) -> Self {
-        return AnyShapeStyle(ShaderLibrary.default.grainGradient3(
-            .boundingRect,
-            .float(3),
-            .float(time)
-        ))
-    }
-    static func grainGradient4(time: Float, gridSize: Int = 3) -> Self {
-        return AnyShapeStyle(ShaderLibrary.default.grainGradient3(
-            .boundingRect,
-            .float(30),
             .float(time)
         ))
     }
