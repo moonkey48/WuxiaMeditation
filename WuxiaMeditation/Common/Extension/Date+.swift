@@ -9,9 +9,8 @@ import SwiftUI
 
 extension Date {
     var wuxiaTime: WuxiaTime {
-        let date = Date()
         let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
+        let hour = calendar.component(.hour, from: self)
         for wuxiaTime in WuxiaTime.allCases {
             if wuxiaTime.timeRange ~= hour {
                 return wuxiaTime

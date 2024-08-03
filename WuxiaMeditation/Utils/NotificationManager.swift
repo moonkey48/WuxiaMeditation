@@ -50,9 +50,7 @@ class NotificationManager: ObservableObject {
             dateComponents.calendar = Calendar.current
             dateComponents.hour = Calendar.current.component(.hour, from: notification.date)
             dateComponents.minute = Calendar.current.component(.minute, from: notification.date)
-            print(Calendar.current.component(.hour, from: notification.date))
 
-            
             let content = UNMutableNotificationContent()
             content.title = "\(notification.date.wuxiaTime.timeDescription)입니다."
             content.sound = UNNotificationSound.defaultRingtone

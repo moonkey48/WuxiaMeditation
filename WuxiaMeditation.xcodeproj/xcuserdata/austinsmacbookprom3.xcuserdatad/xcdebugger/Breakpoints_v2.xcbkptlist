@@ -14,8 +14,8 @@
             filePath = "WuxiaMeditation/Utils/NotificationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "scheduleNotifications()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,24 +62,8 @@
             filePath = "WuxiaMeditation/Utils/NotificationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "scheduleNotifications()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0F927842-851F-4B45-9351-1672E2B457CA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WuxiaMeditation/Utils/NotificationManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "scheduleNotifications()"
             landmarkType = "7">
          </BreakpointContent>
@@ -114,6 +98,36 @@
             endingLineNumber = "98"
             landmarkName = "setDateFromUserDefaults()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9A86A0BD-2B81-486D-B30F-D5F581F0F811 - dcacc198a256cb8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.SettingView.setDateFromUserDefaults() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/View/SettingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98">
+               </Location>
+               <Location
+                  uuid = "9A86A0BD-2B81-486D-B30F-D5F581F0F811 - dcacc198a256cb8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.SettingView.setDateFromUserDefaults() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/View/SettingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -130,6 +144,36 @@
             endingLineNumber = "101"
             landmarkName = "setDateFromUserDefaults()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "18B3C975-977F-4548-B9BB-BC42B99A1188 - dcacc198a256c25"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.SettingView.setDateFromUserDefaults() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/View/SettingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101">
+               </Location>
+               <Location
+                  uuid = "18B3C975-977F-4548-B9BB-BC42B99A1188 - dcacc198a256c25"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.SettingView.setDateFromUserDefaults() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/View/SettingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,6 +189,98 @@
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "setDateFromUserDefaults()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D77263E-32DF-4A5C-BBBA-DE13D3A8EAFC - dcacc198a256d86"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.SettingView.setDateFromUserDefaults() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/View/SettingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104">
+               </Location>
+               <Location
+                  uuid = "9D77263E-32DF-4A5C-BBBA-DE13D3A8EAFC - dcacc198a256d86"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.SettingView.setDateFromUserDefaults() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/View/SettingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "49F91965-E114-4709-9E1B-5B2045705246"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WuxiaMeditation/Utils/NotificationManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "scheduleNotifications()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "49F91965-E114-4709-9E1B-5B2045705246 - 3cc2ea1147cb1ee8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.NotificationManager.scheduleNotifications() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/Utils/NotificationManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57">
+               </Location>
+               <Location
+                  uuid = "49F91965-E114-4709-9E1B-5B2045705246 - 3cc2ea1147cb1ee8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WuxiaMeditation.NotificationManager.scheduleNotifications() -&gt; ()"
+                  moduleName = "WuxiaMeditation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/Utils/NotificationManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "71BA35D7-8BF6-4310-B899-1355FE68928E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WuxiaMeditation/Utils/NotificationManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "scheduleNotifications()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
