@@ -27,6 +27,9 @@ let dummyMeditationSentenceList: [MeditationSentence] = [
     MeditationSentence(sentence: "어질지 않은 사람을 보면,\n속으로 스스로 반성하라.", author: "공자"),
     MeditationSentence(sentence: "거처는 마음을 변화시키고,\n수양은 몸을 변화시킨다.", author: "맹자"),
     MeditationSentence(sentence: "스스로 돌아봐서 잘못이 없다면,\n천만인이 가로막아도 나는 가리라.", author: "맹자"),
+    MeditationSentence(sentence: "세상은 고통으로 가득하지만 한편 그것을 이겨내는 일로도 가득차 있다", author: "헬렌 켈러"),
+    MeditationSentence(sentence: "쓰러진 자 망할까 두렵지 않고, 낮춘 자 거만할까 두렵지 않다", author: "J.버넌"),
+    MeditationSentence(sentence: "노동은 세개의 큰 악, 즉, 지루함, 부도덕, 그리고 가난을 제거한다.", author: "괴테"),
 ]
 
 
