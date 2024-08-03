@@ -20,75 +20,74 @@ struct SettingView: View {
     @State private var thirdTime = Date()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
-            Text("운기조식 알람 시간")
-                .font(.customTitle)
-                .padding(.vertical, 24)
-            if isEditMode {
-                DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
+        ZStack {
+            DefaultBackgroundAnimationView()
+            VStack(alignment: .leading, spacing: 30) {
+                Text("운기조식 알람 시간")
+                    .font(.customTitle)
+                    .padding(.vertical, 24)
+                if isEditMode {
+                    DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
+                        .frame(height: 50)
+                    DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
+                        .frame(height: 50)
+                    DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
+                        .frame(height: 50)
+                } else {
+                    HStack {
+                        Text("첫번째 운기조식")
+                        Spacer()
+                        Text(firstTime.hourAndMinute)
+                    }
                     .frame(height: 50)
-                DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
+                    HStack {
+                        Text("두번째 운기조식")
+                        Spacer()
+                        Text(secondTime.hourAndMinute)
+                    }
                     .frame(height: 50)
-                DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
+                    HStack {
+                        Text("세번째 운기조식")
+                        Spacer()
+                        Text(thirdTime.hourAndMinute)
+                    }
                     .frame(height: 50)
-            } else {
-                HStack {
-                    Text("첫번째 운기조식")
-                    Spacer()
-                    Text(firstTime.hourAndMinute)
                 }
-                .frame(height: 50)
-                HStack {
-                    Text("두번째 운기조식")
-                    Spacer()
-                    Text(secondTime.hourAndMinute)
-                }
-                .frame(height: 50)
-                HStack {
-                    Text("세번째 운기조식")
-                    Spacer()
-                    Text(thirdTime.hourAndMinute)
-                }
-                .frame(height: 50)
+                Spacer()
             }
-            Spacer()
-        }
-        .font(.customTitle3)
-        .foregroundStyle(.white)
-        .colorScheme(.dark)
-        .background(
-            Image(.background)
-                .ignoresSafeArea()
-        )
-        .toolbar {
-            if isEditMode {
+            .font(.customTitle3)
+            .foregroundStyle(.white)
+            .colorScheme(.dark)
+            .toolbar {
+                if isEditMode {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            setDateFromUserDefaults()
+                            isEditMode.toggle()
+                        } label: {
+                            Text("취소")
+                        }
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        setDateFromUserDefaults()
+                        if isEditMode {
+                            setUserDefaultsFromDates()
+                        }
                         isEditMode.toggle()
                     } label: {
-                        Text("취소")
+                        if isEditMode {
+                            Text("저장")
+                        } else {
+                            Text("수정")
+                        }
                     }
                 }
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    if isEditMode {
-                        setUserDefaultsFromDates()
-                    }
-                    isEditMode.toggle()
-                } label: {
-                    if isEditMode {
-                        Text("저장")
-                    } else {
-                        Text("수정")
-                    }
-                }
+            .padding()
+            .onAppear {
+                setDateFromUserDefaults()
             }
-        }
-        .padding()
-        .onAppear {
-            setDateFromUserDefaults()
         }
     }
     

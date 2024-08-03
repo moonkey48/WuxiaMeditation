@@ -20,6 +20,9 @@ extension MeditationState {
 @Observable
 final class MeditationObservable {
     var meditationState: MeditationState = .notStarted
+    var time: Float = 0
+    var secondTime: Float = 0
+    var timer: Timer?
     
     var isMeditationDoneOnTime = false
     var energyState: EnergyState = .level0
@@ -31,7 +34,10 @@ final class MeditationObservable {
     var meditationTimeRemaining: String = ""
     
     init() {
-        AudioPlayManager.shared.playSound(sound: "meditation")
+//        AudioPlayManager.shared.playSound(sound: "meditation")
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
+            self?.time += 0.1
+        }
     }
     
     var isFinishedMeditation: Bool {
@@ -51,6 +57,9 @@ extension MeditationObservable {
     
     func setMeditationStarted() {
         withAnimation {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
+                self?.secondTime += 0.1
+            }
             futureData = Calendar.current.date(byAdding: .minute, value: MeditationState.standardMinute, to: Date()) ?? Date()
             updateTimeRemaining()
             timerCount = 0
@@ -75,7 +84,9 @@ extension MeditationObservable {
 // Meditation
 extension MeditationObservable {
     func setMeditationEnded() {
+        secondTime = 0
         withAnimation {
+            timer?.invalidate()
             calculateEnergyLevel()
             isMeditationDoneOnTime = true
             meditationState = .preparing

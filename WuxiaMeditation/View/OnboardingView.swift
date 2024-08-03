@@ -40,7 +40,7 @@ struct OnboardingView: View {
                 }
             }
             .font(.customCaption)
-            .foregroundStyle(.white)
+            .foregroundStyle(.primaryGreen)
             .padding(.bottom, 30)
             
             LargeButtonView(title: "시작") {
@@ -55,8 +55,7 @@ struct OnboardingView: View {
         }
         .padding(16)
         .background(
-            PlayerView(energyState: .constant(.level0))
-                .ignoresSafeArea()
+            DefaultBackgroundAnimationView()
         )
         .sheet(isPresented: $isShowChangeNotificationDate) {
             NotificationSelectDateView(dateList: $dateList, isShowChangeNotificationDate: $isShowChangeNotificationDate)
