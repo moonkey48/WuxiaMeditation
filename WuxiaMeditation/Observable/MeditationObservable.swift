@@ -12,41 +12,52 @@ enum MeditationState {
     case preparing
     case progressing
 }
-
-extension MeditationState {
-    static let standardMinute: Int = 10
+enum MeditationRange {
+    case smallMeditation
+    case bigMeditation
+    
+    var time: Int {
+        switch self {
+        case .smallMeditation:
+            5
+        case .bigMeditation:
+            10
+        }
+    }
 }
 
 @Observable
 final class MeditationObservable {
     var meditationState: MeditationState = .notStarted
-    var time: Float = 0
-    var secondTime: Float = 0
-    var timer: Timer?
+    var timeForRotating: Float = 0
+    var timeForScale: Float = 0
+    var timerForMeditation: Timer?
     
     var isMeditationDoneOnTime = false
     var energyState: EnergyState = .level0
     var currentWuxiaTime: WuxiaTime = Date().wuxiaTime
     var meditationSentence: MeditationSentence = dummyMeditationSentenceList[0]
     var isShowEndMeditationAlert = false
-    var futureData: Date = Calendar.current.date(byAdding: .minute, value: MeditationState.standardMinute, to: Date()) ?? Date()
+    var futureData: Date?
+    var selectedMeditaionRange: MeditationRange = .smallMeditation
     var timerCount: Int = 0
     var meditationTimeRemaining: String = ""
     
     init() {
 //        AudioPlayManager.shared.playSound(sound: "meditation")
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
-            self?.time += 0.1
+            self?.timeForRotating += 0.1
         }
     }
     
     var isFinishedMeditation: Bool {
-        MeditationState.standardMinute * 60 > timerCount ? false : true
+        selectedMeditaionRange.time * 60 > timerCount ? false : true
     }
 }
 
 // EneryLevel
 extension MeditationObservable {
+    // TODO: 어떤 기능을 위한 함수이지
     func checkWuxiaTimeChanged() {
         let newDate = Date.now
         if currentWuxiaTime != newDate.wuxiaTime {
@@ -55,12 +66,13 @@ extension MeditationObservable {
         currentWuxiaTime = newDate.wuxiaTime
     }
     
-    func setMeditationStarted() {
+    func setMeditationStarted(_ meditationRange: MeditationRange) {
         withAnimation {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
-                self?.secondTime += 0.1
+            selectedMeditaionRange = meditationRange
+            timerForMeditation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
+                self?.timeForScale += 0.1
             }
-            futureData = Calendar.current.date(byAdding: .minute, value: MeditationState.standardMinute, to: Date()) ?? Date()
+            futureData = Calendar.current.date(byAdding: .minute, value: selectedMeditaionRange.time, to: Date()) ?? Date()
             updateTimeRemaining()
             timerCount = 0
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -84,9 +96,9 @@ extension MeditationObservable {
 // Meditation
 extension MeditationObservable {
     func setMeditationEnded() {
-        secondTime = 0
+        timeForScale = 0
         withAnimation {
-            timer?.invalidate()
+            timerForMeditation?.invalidate()
             calculateEnergyLevel()
             isMeditationDoneOnTime = true
             meditationState = .preparing
@@ -99,9 +111,9 @@ extension MeditationObservable {
     }
     
     private func calculateEnergyLevel() {
-        if timerCount > MeditationState.standardMinute * 60 / 2 {
+        if timerCount > selectedMeditaionRange.time * 60 / 2 {
             energyState = EnergyState(rawValue: energyState.rawValue - 1 >= 0 ? energyState.rawValue - 1  : 0) ?? energyState
-        } else if timerCount > MeditationState.standardMinute * 60 {
+        } else if timerCount > selectedMeditaionRange.time * 60 {
             if energyState.rawValue - 2 >= 0 {
                 energyState = EnergyState(rawValue: energyState.rawValue - 2) ?? energyState
             } else if energyState.rawValue - 1 >= 0 {
@@ -117,6 +129,10 @@ extension MeditationObservable {
     }
     
     private func updateTimeRemaining() {
+        guard let futureData else {
+            meditationTimeRemaining = "남은 시간 계산 오류"
+            return
+        }
         let remaining = Calendar.current.dateComponents([.minute, .second], from: Date(), to: futureData)
         let minute = remaining.minute ?? 0
         let second = remaining.second ?? 0

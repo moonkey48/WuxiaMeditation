@@ -12,7 +12,7 @@ struct DefaultBackgroundAnimationView: View {
     @State private var staticTime: Float = 0
     var body: some View {
         Rectangle()
-            .fill(.circleMotionWithBackground(time: animationTime, secondTime: staticTime))
+            .fill(.circleMotionWithBackground(timeForRotating: animationTime, timeForScale: staticTime))
             .ignoresSafeArea()
             .onAppear {
                 Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
