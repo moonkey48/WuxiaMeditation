@@ -94,19 +94,19 @@ half4 circleMotionWithBackground(float2 position, float4 bounds, float size, flo
     float maxRadius = min(bounds.z, bounds.w) / 2.0;
     float minRadius = maxRadius / 4.0;
     
-    float cycleTime = 15.0;
+    float cycleTime = 14.0;
     float t = fmod(secondTime, cycleTime);
     float radius;
     
-    if (t < 5.0) {
+    if (t < 2.0) {
         radius = maxRadius;
-    } else if (t < 10.0) {
-        float progress = smoothstep(0.0, 1.0, (t - 5.0) / 5.0);
+    } else if (t < 7.0) {
+        float progress = smoothstep(0.0, 1.0, (t - 2.0) / 5.0);
         radius = mix(maxRadius, minRadius, progress);
-    } else if (t < 13.0) {
+    } else if (t < 9.0) {
         radius = minRadius;
     } else {
-        float progress = smoothstep(0.0, 1.0, (t - 13.0) / 2.0);
+        float progress = smoothstep(0.0, 1.0, (t - 9.0) / 5.0);
         radius = mix(minRadius, maxRadius, progress);
     }
     

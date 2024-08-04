@@ -12,6 +12,7 @@ enum MeditationState {
     case preparing
     case progressing
 }
+
 enum MeditationRange {
     case smallMeditation
     case bigMeditation
@@ -22,6 +23,23 @@ enum MeditationRange {
             5
         case .bigMeditation:
             10
+        }
+    }
+}
+
+enum BreathState {
+    case inhale
+    case exhale
+    case pause
+    
+    static let inhaleExhale: Int = 5
+    static let pauseGap: Int = 2
+    
+    var wuxiaDescription: String {
+        switch self {
+        case .inhale: "흡 吸"
+        case .exhale: "호 呼"
+        case .pause: ""
         }
     }
 }
@@ -42,6 +60,19 @@ final class MeditationObservable {
     var selectedMeditaionRange: MeditationRange = .smallMeditation
     var timerCount: Int = 0
     var meditationTimeRemaining: String = ""
+    
+    var breathStateDescription: BreathState? {
+        let dump = Int(timeForScale) % (BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2)
+        
+        if dump >= BreathState.pauseGap && dump < BreathState.inhaleExhale + BreathState.pauseGap {
+            return .exhale
+        } else if dump >= BreathState.inhaleExhale + BreathState.pauseGap * 2 &&
+                    dump < BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2 {
+            return .inhale
+        }
+        return nil
+    }
+    
     
     init() {
 //        AudioPlayManager.shared.playSound(sound: "meditation")
