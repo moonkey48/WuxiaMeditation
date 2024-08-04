@@ -20,7 +20,7 @@ enum MeditationRange {
     var time: Int {
         switch self {
         case .smallMeditation:
-            5
+            1
         case .bigMeditation:
             10
         }
