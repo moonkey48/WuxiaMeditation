@@ -57,11 +57,11 @@ enum WuxiaTime: Int, CaseIterable {
     
     var titleDescriptionBeforeMeditation: String {
         switch self {
-        case .state0:
+        case .state0, .state1, .state2:
             "\(self.timeDescription)입니다.\n오늘 하루를 돌아보며,\n운기조식을 통해\n탁한 기를 내보내세요."
-        case .state4:
+        case .state4,.state5, .state6:
             "\(self.timeDescription)입니다.\n하루를 시작하기 전,\n운기조식을 통해\n마음을 정돈하세요."
-        case .state10:
+        case .state9, .state10, .state11:
             "\(self.timeDescription)입니다.\n오늘의 일을 정리하고\n운기조식을 통해\n휴식 전 하루를 돌아보세요."
         default:
             "\(self.timeDescription)입니다.\n운기조식을 통해\n마음을 정돈하세요."

@@ -14,7 +14,7 @@ struct MainView: View {
         NavigationStack {
             ZStack {
                 Rectangle()
-                    .fill(.circleMotionWithBackground(time: observable.time, secondTime: observable.secondTime))
+                    .fill(.circleMotionWithBackground(timeForRotating: observable.timeForRotating, timeForScale: observable.timeForScale))
                     .ignoresSafeArea()
                 VStack {
                     HStack {
@@ -67,8 +67,13 @@ struct EnergyCenterView: View {
             .multilineTextAlignment(.center)
             .lineSpacing(4.0)
             .padding(.bottom, 40)
-        LargeButtonView(title: "운기조식 시작", energyState: observable.energyState) {
-            observable.setMeditationStarted()
+        HStack {
+            LargeButtonView(title: "소주천 小周天", meditationRange: .smallMeditation) {
+                observable.setMeditationStarted(.smallMeditation)
+            }
+            LargeButtonView(title: "대주천 大周天", meditationRange: .bigMeditation) {
+                observable.setMeditationStarted(.bigMeditation)
+            }
         }
     }
 }
@@ -78,18 +83,31 @@ struct MeditationView: View {
     
     var body: some View {
         Spacer()
-        VStack(spacing: 20) {
+        Spacer()
+        VStack {
+            if let desciription = observable.breathStateDescription?.wuxiaDescription {
+                Text(desciription)
+                    .font(.customTitle3)
+                    .foregroundStyle(.white)
+            }
+        }
+        .animation(.easeInOut(duration: 1), value: observable.breathStateDescription?.wuxiaDescription)
+        Spacer()
+        Spacer()
+        VStack(spacing: 10) {
             Text(observable.meditationSentence.sentence)
                 .font(.customTitle3)
+                .lineSpacing(1.0)
             Text(observable.meditationSentence.author)
                 .font(.customCaption)
         }
         .foregroundStyle(.primaryGreen)
         .multilineTextAlignment(.center)
-        .lineSpacing(6.0)
-        .padding(.bottom, 40)
+        .frame(height: 140)
+        .padding(.bottom, 20)
         
-        LargeButtonView(title: observable.isFinishedMeditation ? "운기조식 종료" : "\(observable.meditationTimeRemaining) 뒤 종료", color: .white.opacity(observable.isFinishedMeditation ? 1 : 0.5), energyState: observable.energyState) {
+        
+        LargeButtonView(title: observable.isFinishedMeditation ? "운기조식 종료" : "\(observable.meditationTimeRemaining) 뒤 종료", color: .white.opacity(observable.isFinishedMeditation ? 1 : 0.5)) {
             observable.isShowEndMeditationAlert = true
         }
         .alert(isPresented: $observable.isShowEndMeditationAlert) {
