@@ -41,15 +41,68 @@ struct MainView: View {
                     }
                 }
                 .padding()
-                .onAppear {
-                    observable.checkWuxiaTimeChanged()
+                
+                if case .progressing = observable.meditationState {
+                    alertView
                 }
                 
+            }
+            .onAppear {
+                observable.checkWuxiaTimeChanged()
             }
         }
         .tint(.primaryGreen)
     }
 }
+
+private extension MainView {
+    var alertView: some View {
+        Group {
+            VStack(spacing: 10) {
+                Text("운기조식을 마무리합니다.")
+                    .font(.customTitle3)
+                Text("마지막으로 눈을 감고,\n생각을 갈무리 하신 뒤 종료하십시오.")
+                    .foregroundStyle(.black.opacity(0.6))
+                    .padding(.bottom, 20)
+                    
+                HStack {
+                    Button {
+                        withAnimation {
+                            observable.isShowEndMeditationAlert = false
+                        }
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("취소")
+                                .foregroundStyle(.primaryRed)
+                            Spacer()
+                        }
+                    }
+                    Button {
+                        observable.setMeditationEnded()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("종료")
+                                .foregroundStyle(.primaryGreen)
+                            Spacer()
+                        }
+                    }
+                }
+            }
+            .padding(20)
+            .font(.customBody)
+            .multilineTextAlignment(.center)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.ultraThinMaterial.opacity(0.9))
+            )
+        }
+        .padding(.horizontal, 30)
+        .opacity(observable.isShowEndMeditationAlert ? 1 : 0)
+    }
+}
+
 
 struct EnergyCenterView: View {
     var observable: MeditationObservable
@@ -108,16 +161,9 @@ struct MeditationView: View {
         
         
         LargeButtonView(title: observable.isFinishedMeditation ? "운기조식 종료" : "\(observable.meditationTimeRemaining) 뒤 종료", color: .white.opacity(observable.isFinishedMeditation ? 1 : 0.5)) {
-            observable.isShowEndMeditationAlert = true
-        }
-        .alert(isPresented: $observable.isShowEndMeditationAlert) {
-            Alert(
-                title: Text("운기조식을 종료합니다."),
-                primaryButton:
-                        .destructive(Text("종료"), action: {
-                            observable.setMeditationEnded()
-                        }),
-                secondaryButton: .cancel(Text("취소")))
+            withAnimation {
+                observable.isShowEndMeditationAlert = true
+            }
         }
     }
     
