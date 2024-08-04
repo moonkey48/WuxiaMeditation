@@ -12,6 +12,7 @@
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+*.xcuserstate
 
 
 ## Finder
@@ -98,6 +99,5 @@ iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,firebase
 
-# API KEY
-*.xcconfig
-/Outline/GoogleService-Info.plist
+# Product
+/Product
