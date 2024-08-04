@@ -92,11 +92,6 @@ struct OnboardingView: View {
     }
 }
 
-extension OnboardingView {
-    
-}
-
-
 /// handle notifications
 extension OnboardingView {
     func setDateFromUserDefaults() {

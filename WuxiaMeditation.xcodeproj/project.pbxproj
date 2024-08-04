@@ -29,6 +29,7 @@
 		3A6D29642C4007A300C1BD41 /* GrainGradient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D29632C4007A300C1BD41 /* GrainGradient.metal */; };
 		3A6D29662C425B6D00C1BD41 /* BacgkroundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D29652C425B6D00C1BD41 /* BacgkroundEffect.swift */; };
 		3A9EB0B72C59182700DA5553 /* DefaultBackgroundAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EB0B62C59182700DA5553 /* DefaultBackgroundAnimationView.swift */; };
+		3ABBCE8B2C5F5A3100D453A0 /* MeditationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABBCE8A2C5F5A3100D453A0 /* MeditationState.swift */; };
 		3AF108AB2C20804100A956A1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AA2C20804100A956A1 /* NotificationManager.swift */; };
 		3AF108AD2C20809300A956A1 /* NotificationSelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */; };
 		3AF108AF2C21B9AF00A956A1 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AE2C21B9AF00A956A1 /* SettingView.swift */; };
@@ -59,6 +60,7 @@
 		3A6D29632C4007A300C1BD41 /* GrainGradient.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = GrainGradient.metal; sourceTree = "<group>"; };
 		3A6D29652C425B6D00C1BD41 /* BacgkroundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacgkroundEffect.swift; sourceTree = "<group>"; };
 		3A9EB0B62C59182700DA5553 /* DefaultBackgroundAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBackgroundAnimationView.swift; sourceTree = "<group>"; };
+		3ABBCE8A2C5F5A3100D453A0 /* MeditationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationState.swift; sourceTree = "<group>"; };
 		3AF108AA2C20804100A956A1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSelectDateView.swift; sourceTree = "<group>"; };
 		3AF108AE2C21B9AF00A956A1 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				3A5AFB942C1CBC350093D449 /* WuxiaTime.swift */,
 				3A5AFB962C1CBD5F0093D449 /* EneryState.swift */,
 				3A5AFB982C1CC46B0093D449 /* MeditationSentence.swift */,
+				3ABBCE8A2C5F5A3100D453A0 /* MeditationState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5AFB6D2C1CA6FD0093D449 /* ContentView.swift in Sources */,
+				3ABBCE8B2C5F5A3100D453A0 /* MeditationState.swift in Sources */,
 				3A5AFBB02C1D07660093D449 /* AudioPlayManager.swift in Sources */,
 				3A5AFBC32C2046850093D449 /* MeditationObservable.swift in Sources */,
 				3A5AFB8A2C1CB0C10093D449 /* Font+.swift in Sources */,

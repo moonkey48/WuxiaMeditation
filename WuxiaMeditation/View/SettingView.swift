@@ -26,6 +26,9 @@ struct SettingView: View {
                 Text("운기조식 알람 시간")
                     .font(.customTitle)
                     .padding(.vertical, 24)
+                    .foregroundStyle(.primaryGreen)
+                Spacer()
+                    .frame(height: 60)
                 if isEditMode {
                     DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
                         .frame(height: 50)

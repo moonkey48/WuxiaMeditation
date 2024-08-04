@@ -18,7 +18,6 @@ struct NotificationSelectDateView: View {
         return ""
     }
     
-    
     var body: some View {
         VStack(spacing: 30) {
             ForEach(dateList.indices, id: \.self) { index in
