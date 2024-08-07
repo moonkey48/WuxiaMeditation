@@ -19,14 +19,20 @@ struct SettingView: View {
     @State private var secondTime = Date()
     @State private var thirdTime = Date()
     
+    @State private var isShowWuxiaInfo = false
+    
     var body: some View {
         ZStack {
             DefaultBackgroundAnimationView()
             VStack {
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 30) {
                     VStack(alignment: .leading,spacing: 24) {
-                        Text("운기조식 알람 시간")
-                            .font(.customTitleBold)
+                        HStack {
+                            Text("운기조식 알람 시간")
+                                .font(.customTitle3Bold)
+                            Spacer()
+                            Image(systemName: "person.and.background.dotted")
+                        }
                         Divider()
                         if isEditMode {
                             DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
@@ -51,13 +57,27 @@ struct SettingView: View {
                         }
                     }
                     .padding(20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.white.opacity(0.3))
+                    )
+                    Button {
+                        isShowWuxiaInfo = true
+                    } label: {
+                        HStack(spacing: 24) {
+                            Text("무협인문 武俠入門")
+                                .font(.customTitle3Bold)
+                            Spacer()
+                            Image(systemName: "ipad.and.arrow.forward")
+                        }
+                        .padding(20)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.white.opacity(0.3))
+                        )
+                    }
                 }
                 .foregroundStyle(.primaryGreen)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(.white.opacity(0.3))
-                )
-                
                 Spacer()
             }
             .font(.customTitle3)
@@ -90,6 +110,9 @@ struct SettingView: View {
                 }
             }
             .padding()
+            .sheet(isPresented: $isShowWuxiaInfo) {
+                WuxiaInfoView()
+            }
             .onAppear {
                 setDateFromUserDefaults()
             }
