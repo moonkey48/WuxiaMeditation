@@ -109,7 +109,7 @@ struct EnergyCenterView: View {
     
     var body: some View {
         Text(observable.isMeditationDoneOnTime ? observable.currentWuxiaTime.titleDescriptionAfterMeditation : observable.currentWuxiaTime.titleDescriptionBeforeMeditation)
-            .font(.customTitle)
+            .font(.customTitle2)
             .foregroundStyle(.white)
             .multilineTextAlignment(.center)
             .lineSpacing(6.0)
@@ -135,30 +135,31 @@ struct MeditationView: View {
     @Bindable var observable: MeditationObservable
     
     var body: some View {
-        Spacer()
-        Spacer()
-        VStack {
-            if let desciription = observable.breathStateDescription?.wuxiaDescription {
-                Text(desciription)
-                    .font(.customTitle3)
-                    .foregroundStyle(.white)
+        ZStack {
+            VStack {
+                Spacer()
+                if let desciription = observable.breathStateDescription?.wuxiaDescription {
+                    Text(desciription)
+                        .font(.customTitle3)
+                        .foregroundStyle(.white)
+                }
+                Spacer()
+            }
+            .animation(.easeInOut(duration: 1), value: observable.breathStateDescription?.wuxiaDescription)
+            VStack {
+                Spacer()
+                VStack(spacing: 10) {
+                    Text(observable.meditationSentence.sentence)
+                        .font(.customTitle3)
+                        .lineSpacing(1.0)
+                    Text(observable.meditationSentence.author)
+                        .font(.customCaption)
+                }
+                .foregroundStyle(.primaryGreen)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 20)
             }
         }
-        .animation(.easeInOut(duration: 1), value: observable.breathStateDescription?.wuxiaDescription)
-        Spacer()
-        Spacer()
-        VStack(spacing: 10) {
-            Text(observable.meditationSentence.sentence)
-                .font(.customTitle3)
-                .lineSpacing(1.0)
-            Text(observable.meditationSentence.author)
-                .font(.customCaption)
-        }
-        .foregroundStyle(.primaryGreen)
-        .multilineTextAlignment(.center)
-        .frame(height: 140)
-        .padding(.bottom, 20)
-        
         
         LargeButtonView(title: observable.isFinishedMeditation ? "운기조식 종료" : "\(observable.meditationTimeRemaining) 뒤 종료", color: .white.opacity(observable.isFinishedMeditation ? 1 : 0.5)) {
             withAnimation {
