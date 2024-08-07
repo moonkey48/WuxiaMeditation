@@ -65,7 +65,7 @@ struct SettingView: View {
                         isShowWuxiaInfo = true
                     } label: {
                         HStack(spacing: 24) {
-                            Text("무협인문 武俠入門")
+                            Text("무협입문 武俠入門")
                                 .font(.customTitle3Bold)
                             Spacer()
                             Image(systemName: "ipad.and.arrow.forward")
@@ -111,7 +111,7 @@ struct SettingView: View {
             }
             .padding()
             .sheet(isPresented: $isShowWuxiaInfo) {
-                WuxiaInfoView()
+                WuxiaInfoView(isShowWuxiaInfo: $isShowWuxiaInfo)
             }
             .onAppear {
                 setDateFromUserDefaults()

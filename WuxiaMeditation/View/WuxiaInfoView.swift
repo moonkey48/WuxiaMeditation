@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WuxiaInfoView: View {
+    @Binding var isShowWuxiaInfo: Bool
     var body: some View {
         ZStack {
             DefaultBackgroundAnimationView()
@@ -15,47 +16,61 @@ struct WuxiaInfoView: View {
             Color.black.opacity(0.6)
                 .ignoresSafeArea()
                 .background(.ultraThinMaterial.opacity(0.4))
-            ScrollView {
-                VStack(alignment: .leading, spacing: 80){
+            VStack {
+                HStack {
                     Spacer()
-                        .frame(height: 100)
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 24) {
-                            Text("運氣調息")
-                                .font(.system(size: 80))
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("운기조식(運氣調息)은 기(氣)의 흐름을 조절하고 마음을 다스리는 명상입니다.")
-                                    .multilineTextAlignment(.center)
-                            }
-                            .font(.customBody)
-                        }
-                        Spacer()
-                    }
-                    ForEach(WuxiaInfo.dummyInfoList) { info in
-                        VStack(alignment: .leading, spacing: 26) {
-                            Text(info.title)
-                                .font(.customTitle3Bold)
-                            ForEach(info.infoList) { subInfo in
-                                VStack(alignment: .leading, spacing: 8) {
-                                    if let subTitle = subInfo.title {
-                                        Text(subTitle)
-                                    }
-                                    VStack(alignment: .leading, spacing: 20) {
-                                        ForEach(subInfo.description, id: \.self) { desciption in
-                                            Text(desciption)
-                                        }
-                                    }
-                                    .opacity(0.7)
-                                }
-                            }
-                        }
-                        .font(.customBody)
+                    Button {
+                        isShowWuxiaInfo = false
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                            .imageScale(.large)
+                        
                     }
                 }
                 .padding()
                 .foregroundStyle(.white)
-                .lineSpacing(8)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 80){
+                        Spacer()
+                            .frame(height: 100)
+                        HStack {
+                            Spacer()
+                            VStack(spacing: 24) {
+                                Text("運氣調息")
+                                    .font(.system(size: 80))
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("운기조식(運氣調息)은 기(氣)의 흐름을 조절하고 마음을 다스리는 명상입니다.")
+                                        .multilineTextAlignment(.center)
+                                }
+                                .font(.customBody)
+                            }
+                            Spacer()
+                        }
+                        ForEach(WuxiaInfo.dummyInfoList) { info in
+                            VStack(alignment: .leading, spacing: 26) {
+                                Text(info.title)
+                                    .font(.customTitle3Bold)
+                                ForEach(info.infoList) { subInfo in
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        if let subTitle = subInfo.title {
+                                            Text(subTitle)
+                                        }
+                                        VStack(alignment: .leading, spacing: 20) {
+                                            ForEach(subInfo.description, id: \.self) { desciption in
+                                                Text(desciption)
+                                            }
+                                        }
+                                        .opacity(0.7)
+                                    }
+                                }
+                            }
+                            .font(.customBody)
+                        }
+                    }
+                    .padding()
+                    .foregroundStyle(.white)
+                    .lineSpacing(8)
+                }
             }
         }
     }
@@ -64,5 +79,5 @@ struct WuxiaInfoView: View {
 
  
 #Preview {
-    WuxiaInfoView()
+    WuxiaInfoView(isShowWuxiaInfo: .constant(true))
 }
