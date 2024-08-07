@@ -96,6 +96,7 @@ extension MeditationObservable {
             calculateEnergyLevel()
             isMeditationDoneOnTime = true
             meditationState = .preparing
+            isShowEndMeditationAlert = false
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
