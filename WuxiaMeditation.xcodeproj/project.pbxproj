@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A42B9F22C63AFA200F8CEC7 /* WuxiaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42B9F12C63AFA200F8CEC7 /* WuxiaInfoView.swift */; };
+		3A42B9F42C63CD0000F8CEC7 /* WuxiaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42B9F32C63CD0000F8CEC7 /* WuxiaInfo.swift */; };
 		3A5AFB6B2C1CA6FD0093D449 /* WuxiaMeditationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB6A2C1CA6FD0093D449 /* WuxiaMeditationApp.swift */; };
 		3A5AFB6D2C1CA6FD0093D449 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AFB6C2C1CA6FD0093D449 /* ContentView.swift */; };
 		3A5AFB712C1CA6FE0093D449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AFB702C1CA6FE0093D449 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		3A42B9F12C63AFA200F8CEC7 /* WuxiaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WuxiaInfoView.swift; sourceTree = "<group>"; };
+		3A42B9F32C63CD0000F8CEC7 /* WuxiaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WuxiaInfo.swift; sourceTree = "<group>"; };
 		3A5AFB672C1CA6FD0093D449 /* WuxiaMeditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WuxiaMeditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5AFB6A2C1CA6FD0093D449 /* WuxiaMeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WuxiaMeditationApp.swift; sourceTree = "<group>"; };
 		3A5AFB6C2C1CA6FD0093D449 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				3A5AFB962C1CBD5F0093D449 /* EneryState.swift */,
 				3A5AFB982C1CC46B0093D449 /* MeditationSentence.swift */,
 				3ABBCE8A2C5F5A3100D453A0 /* MeditationState.swift */,
+				3A42B9F32C63CD0000F8CEC7 /* WuxiaInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				3A5AFB862C1CAC8B0093D449 /* MainView.swift in Sources */,
 				3A5AFB932C1CBC190093D449 /* Date+.swift in Sources */,
 				3A5AFB972C1CBD5F0093D449 /* EneryState.swift in Sources */,
+				3A42B9F42C63CD0000F8CEC7 /* WuxiaInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
