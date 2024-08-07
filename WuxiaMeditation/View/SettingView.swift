@@ -22,40 +22,42 @@ struct SettingView: View {
     var body: some View {
         ZStack {
             DefaultBackgroundAnimationView()
-            VStack(alignment: .leading, spacing: 30) {
-                Text("운기조식 알람 시간")
-                    .font(.customTitle)
-                    .padding(.vertical, 24)
-                    .foregroundStyle(.primaryGreen)
-                Spacer()
-                    .frame(height: 60)
-                if isEditMode {
-                    DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
-                        .frame(height: 50)
-                    DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
-                        .frame(height: 50)
-                    DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
-                        .frame(height: 50)
-                } else {
-                    HStack {
-                        Text("첫번째 운기조식")
-                        Spacer()
-                        Text(firstTime.hourAndMinute)
+            VStack {
+                VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading,spacing: 24) {
+                        Text("운기조식 알람 시간")
+                            .font(.customTitleBold)
+                        Divider()
+                        if isEditMode {
+                            DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
+                            DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
+                            DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
+                        } else {
+                            HStack {
+                                Text("첫번째 운기조식")
+                                Spacer()
+                                Text(firstTime.hourAndMinute)
+                            }
+                            HStack {
+                                Text("두번째 운기조식")
+                                Spacer()
+                                Text(secondTime.hourAndMinute)
+                            }
+                            HStack {
+                                Text("세번째 운기조식")
+                                Spacer()
+                                Text(thirdTime.hourAndMinute)
+                            }
+                        }
                     }
-                    .frame(height: 50)
-                    HStack {
-                        Text("두번째 운기조식")
-                        Spacer()
-                        Text(secondTime.hourAndMinute)
-                    }
-                    .frame(height: 50)
-                    HStack {
-                        Text("세번째 운기조식")
-                        Spacer()
-                        Text(thirdTime.hourAndMinute)
-                    }
-                    .frame(height: 50)
+                    .padding(20)
                 }
+                .foregroundStyle(.primaryGreen)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.white.opacity(0.3))
+                )
+                
                 Spacer()
             }
             .font(.customTitle3)

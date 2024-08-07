@@ -109,7 +109,7 @@ struct EnergyCenterView: View {
     
     var body: some View {
         Text(observable.isMeditationDoneOnTime ? observable.currentWuxiaTime.titleDescriptionAfterMeditation : observable.currentWuxiaTime.titleDescriptionBeforeMeditation)
-            .font(.customTitle)
+            .font(.customTitle2)
             .foregroundStyle(.white)
             .multilineTextAlignment(.center)
             .lineSpacing(6.0)
