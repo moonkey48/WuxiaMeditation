@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MainView: View {
+    @AppStorage("breathSpeed") var breathSpeed: Double = 3
     @State private var observable: MeditationObservable = MeditationObservable()
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Rectangle()
-                    .fill(.circleMotionWithBackground(timeForRotating: observable.timeForRotating, timeForScale: observable.timeForScale))
+                    .fill(.circleMotionWithBackground(timeForRotating: observable.timeForRotating, timeForScale: observable.timeForScale, breathSpeed: Float(breathSpeed)))
                     .ignoresSafeArea()
                 VStack {
                     HStack {

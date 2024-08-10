@@ -24,12 +24,18 @@ private let br = Color("bottom_right")
 // MARK: - Grainy gradient
 
 extension ShapeStyle where Self == AnyShapeStyle {
-    static func circleMotionWithBackground(timeForRotating: Float, timeForScale: Float, gridSize: Int = 3) -> Self {
+    static func circleMotionWithBackground(
+        timeForRotating: Float,
+        timeForScale: Float,
+        gridSize: Int = 3,
+        breathSpeed: Float = 3
+    ) -> Self {
         return AnyShapeStyle(ShaderLibrary.default.circleMotionWithBackground(
             .boundingRect,
             .float(3),
             .float(timeForRotating),
-            .float(timeForScale)
+            .float(timeForScale),
+            .float(breathSpeed)
         ))
     }
     

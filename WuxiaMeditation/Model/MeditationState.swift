@@ -43,3 +43,20 @@ enum BreathState {
         }
     }
 }
+extension BreathState {
+    static func getBreathSpeedDescription(_ breathSpeed: Double) -> String {
+        if breathSpeed < 2 {
+            return "아주 천천히"
+        } else if breathSpeed == 2.0 {
+            return "천천히"
+        } else if breathSpeed == 3.0 {
+            return "보통 속도로"
+        } else if breathSpeed == 4.0 {
+            return "빠르게"
+        } else if breathSpeed == 5.0 {
+            return "아주 빠르게"
+        } else {
+            return "속도 에러"
+        }
+    }
+}

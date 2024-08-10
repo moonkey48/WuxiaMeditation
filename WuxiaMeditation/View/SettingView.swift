@@ -14,6 +14,8 @@ struct SettingView: View {
     @AppStorage("secondTimeString") var secondTimeString: String = "18:00"
     @AppStorage("thirdTimeString") var thirdTimeString: String = "23:00"
     
+    @AppStorage("breathSpeed") var breathSpeed: Double = 3
+    
     @State private var isEditMode = false
     @State private var firstTime = Date()
     @State private var secondTime = Date()
@@ -57,6 +59,25 @@ struct SettingView: View {
                         }
                     }
                     .padding(20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.white.opacity(0.3))
+                    )
+                    VStack {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("호흡 속도")
+                                    .font(.customTitle3Bold)
+                                Spacer()
+                                Text(BreathState.getBreathSpeedDescription(breathSpeed))
+                                    .animation(.easeInOut, value: breathSpeed)
+                                
+                            }
+                            Slider(value: $breathSpeed, in: 1...5, step: 1)
+                                .tint(.primaryGreen)
+                        }
+                        .padding()
+                    }
                     .background(
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.white.opacity(0.3))

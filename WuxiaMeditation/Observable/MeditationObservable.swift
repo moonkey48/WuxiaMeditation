@@ -25,7 +25,8 @@ final class MeditationObservable {
     var meditationTimeRemaining: String = ""
     
     var breathStateDescription: BreathState? {
-        let dump = Int(timeForScale) % (BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2)
+        let breathSpeed = UserDefaults.standard.double(forKey: "breathSpeed") / 3
+        let dump = Int(timeForScale * Float(breathSpeed)) % (BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2)
         
         if dump >= BreathState.pauseGap && dump < BreathState.inhaleExhale + BreathState.pauseGap {
             return .exhale
