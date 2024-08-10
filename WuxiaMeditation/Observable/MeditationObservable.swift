@@ -24,6 +24,8 @@ final class MeditationObservable {
     var timerCount: Int = 0
     var meditationTimeRemaining: String = ""
     
+    let hapticManager: HapticManager?
+    
     var breathStateDescription: BreathState? {
         let breathSpeed = UserDefaults.standard.double(forKey: "breathSpeed") / 3
         let dump = Int(timeForScale * Float(breathSpeed)) % (BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2)
@@ -38,8 +40,10 @@ final class MeditationObservable {
     }
     
     
+    
     init() {
 //        AudioPlayManager.shared.playSound(sound: "meditation")
+        self.hapticManager = HapticManager()
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
             self?.timeForRotating += 0.1
         }
@@ -62,6 +66,7 @@ extension MeditationObservable {
     }
     
     func setMeditationStarted(_ meditationRange: MeditationRange) {
+        hapticManager?.start()
         withAnimation {
             selectedMeditaionRange = meditationRange
             timerForMeditation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
@@ -91,6 +96,7 @@ extension MeditationObservable {
 // Meditation
 extension MeditationObservable {
     func setMeditationEnded() {
+        hapticManager?.stop()
         timeForScale = 0
         withAnimation {
             timerForMeditation?.invalidate()
