@@ -8,15 +8,11 @@
 import CoreHaptics
 import Foundation
 
-@Observable
+
 final class HapticManager {
     private let engine: CHHapticEngine
     private var player: CHHapticPatternPlayer?
-    
-    init(engine: CHHapticEngine) {
-        self.engine = engine
-    }
-    
+
     init?() {
         do {
             let capablitity = CHHapticEngine.capabilitiesForHardware()
@@ -41,36 +37,85 @@ final class HapticManager {
         engine.stop()
     }
     
-    func haptic(
-        type: CHHapticEvent.EventType,
-        intensity: Float,
-        sharpness: Float,
-        duration: Float
-    ) throws {
-        stop()
+    func hapticOnPoints(_ meditationRange: MeditationRange) {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
+            return
+        }
         
-        let eventParams = [
-            CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity),
-            CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)
-        ]
-        let event = CHHapticEvent(eventType: .hapticContinuous, parameters: eventParams, relativeTime: 0, duration: TimeInterval(duration))
-        let pattern = try CHHapticPattern(events: [event], parameters: [])
+        var events = [CHHapticEvent]()
+        let minutes: Int = meditationRange == .smallMeditation ? 60 : 60 * 5
+        for i in stride(from: 0, to: Double(meditationRange.time) * Double(minutes), by: 1) {
+            let time: Int = Int(i.truncatingRemainder(dividingBy: (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap)) * 2))
+            if 
+                time == 0 ||
+                time == BreathState.pauseGap ||
+                time == BreathState.pauseGap + BreathState.inhaleExhale ||
+                time == BreathState.pauseGap * 2 + BreathState.inhaleExhale ||
+                time == BreathState.pauseGap * 2 + BreathState.inhaleExhale * 2 {
+                
+                let value: Float = 2.0
+                let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: value)
+                let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: value)
+                let eventFirst = CHHapticEvent(eventType: .hapticTransient, parameters: [
+                    intensity,
+                    sharpness,
+                ], relativeTime: i)
+                let eventSecond = CHHapticEvent(eventType: .hapticTransient, parameters: [
+                    intensity,
+                    sharpness,
+                ], relativeTime: i + 0.2)
+                events.append(eventFirst)
+                events.append(eventSecond)
+            }
+        }
         
-        player = try engine.makePlayer(with: pattern)
-        start()
+        startEvents(events)
     }
     
-    func haptic(for param: HapticEventParameterable) throws {
-        try haptic(
-            type: .hapticContinuous,
-            intensity: param.intensity, sharpness: param.sharpness,
-            duration: param.duration
-        )
+    func hapticStrongToSlow(_ meditationRange: MeditationRange) {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
+            return
+        }
+        
+        var events = [CHHapticEvent]() 
+        
+        for i in stride(from: 0, to: Double(meditationRange.time) * 60, by: 0.9) {
+
+            let value: Float = calculateValue(i: i.truncatingRemainder(dividingBy: (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap)) * 2)) * 0.5 + 0.2
+            
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: value)
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: value)
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [
+                intensity,
+                sharpness,
+            ], relativeTime: i)
+            events.append(event)
+        }
+        
+        startEvents(events)
     }
     
-    func start() {
-        Task {
-            try? player?.start(atTime: 0)
+    func calculateValue(i: Double) -> Float {
+        print(i)
+        if i >= Double(BreathState.pauseGap) && i < Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) {
+            return Float(i) / Float(BreathState.inhaleExhale + BreathState.pauseGap)
+        } else if i >= (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap)) && i < (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) * 2) {
+            return 1.0
+        } else if i >= (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) * 2) && i <= Double(BreathState.inhaleExhale) * 2 + Double(BreathState.pauseGap) * 2 {
+            let dump = Float(i) - Float(Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) * 2)
+            return (1.0 - (dump / Float(BreathState.inhaleExhale)))
+        } else {
+            return 0.1
+        }
+    }
+    
+    private func startEvents(_ events: [CHHapticEvent]) {
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            player = try engine.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern: \(error.localizedDescription).")
         }
     }
     
@@ -78,11 +123,3 @@ final class HapticManager {
         try? player?.stop(atTime: 0)
     }
 }
-
-protocol HapticEventParameterable {
-    var intensity: Float { get }
-    var sharpness: Float { get }
-    var duration: Float { get }
-}
-
-

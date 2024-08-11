@@ -43,6 +43,7 @@ enum BreathState {
         }
     }
 }
+
 extension BreathState {
     static func getBreathSpeedDescription(_ breathSpeed: Double) -> String {
         if breathSpeed < 2 {

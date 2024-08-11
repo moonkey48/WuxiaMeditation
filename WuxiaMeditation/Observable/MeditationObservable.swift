@@ -66,11 +66,12 @@ extension MeditationObservable {
     }
     
     func setMeditationStarted(_ meditationRange: MeditationRange) {
-        hapticManager?.start()
+        hapticManager?.hapticOnPoints(selectedMeditaionRange)
         withAnimation {
             selectedMeditaionRange = meditationRange
             timerForMeditation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
-                self?.timeForScale += 0.1
+                self?.timeForScale += 0.05
+            
             }
             futureData = Calendar.current.date(byAdding: .minute, value: selectedMeditaionRange.time, to: Date()) ?? Date()
             updateTimeRemaining()
