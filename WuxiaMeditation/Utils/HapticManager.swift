@@ -53,60 +53,24 @@ final class HapticManager {
                 time == BreathState.pauseGap * 2 + BreathState.inhaleExhale ||
                 time == BreathState.pauseGap * 2 + BreathState.inhaleExhale * 2 {
                 
-                let value: Float = 2.0
+                let value: Float = 0.5
                 let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: value)
                 let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: value)
+                let relativeTime: TimeInterval = i * 3.0 / UserDefaults.standard.double(forKey: "breathSpeed") 
                 let eventFirst = CHHapticEvent(eventType: .hapticTransient, parameters: [
                     intensity,
                     sharpness,
-                ], relativeTime: i)
+                ], relativeTime: relativeTime)
                 let eventSecond = CHHapticEvent(eventType: .hapticTransient, parameters: [
                     intensity,
                     sharpness,
-                ], relativeTime: i + 0.2)
+                ], relativeTime: relativeTime + 0.2)
                 events.append(eventFirst)
                 events.append(eventSecond)
             }
         }
         
         startEvents(events)
-    }
-    
-    func hapticStrongToSlow(_ meditationRange: MeditationRange) {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
-            return
-        }
-        
-        var events = [CHHapticEvent]() 
-        
-        for i in stride(from: 0, to: Double(meditationRange.time) * 60, by: 0.9) {
-
-            let value: Float = calculateValue(i: i.truncatingRemainder(dividingBy: (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap)) * 2)) * 0.5 + 0.2
-            
-            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: value)
-            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: value)
-            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [
-                intensity,
-                sharpness,
-            ], relativeTime: i)
-            events.append(event)
-        }
-        
-        startEvents(events)
-    }
-    
-    func calculateValue(i: Double) -> Float {
-        print(i)
-        if i >= Double(BreathState.pauseGap) && i < Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) {
-            return Float(i) / Float(BreathState.inhaleExhale + BreathState.pauseGap)
-        } else if i >= (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap)) && i < (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) * 2) {
-            return 1.0
-        } else if i >= (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) * 2) && i <= Double(BreathState.inhaleExhale) * 2 + Double(BreathState.pauseGap) * 2 {
-            let dump = Float(i) - Float(Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap) * 2)
-            return (1.0 - (dump / Float(BreathState.inhaleExhale)))
-        } else {
-            return 0.1
-        }
     }
     
     private func startEvents(_ events: [CHHapticEvent]) {
