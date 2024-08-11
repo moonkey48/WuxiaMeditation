@@ -11,6 +11,18 @@ final class AudioPlayManager {
     static let shared = AudioPlayManager()
     private init() {}
     
+    static var musicList: [String] = [
+        "Amber_VYEN",
+        "LordOfTheDawn_JesseGallagher",
+        "Seclusion_TheTides",
+        "Somnolent_TheTides",
+        "SpentaMainyu_JesseGallagher",
+        "TheSleepingProphet_JesseGallagher",
+        "ThinPlaces_JesseGallagher",
+        "Tratak_JesseGallagher",
+        "Venkatesananda_JesseGallagher"
+    ]
+    
     var audioPlayer: AVAudioPlayer?
     
     func playSound(sound: String) {
@@ -22,6 +34,5 @@ final class AudioPlayManager {
                 
             }
         }
-            
     }
 }

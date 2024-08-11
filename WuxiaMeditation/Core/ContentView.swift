@@ -14,6 +14,7 @@ struct ContentView: View {
     init() {
         UserDefaults.standard.setValue(3, forKey: "breathSpeed")
         UserDefaults.standard.setValue(true, forKey: "isHapticOn")
+        UserDefaults.standard.setValue("Somnolent_TheTides", forKey: "selectedMusic")
     }
     
     var body: some View {

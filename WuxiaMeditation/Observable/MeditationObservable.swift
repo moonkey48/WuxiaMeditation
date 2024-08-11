@@ -42,7 +42,7 @@ final class MeditationObservable {
     
     
     init() {
-//        AudioPlayManager.shared.playSound(sound: "meditation")
+        AudioPlayManager.shared.playSound(sound: "Amber_VYEN")
         self.hapticManager = HapticManager()
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
             self?.timeForRotating += 0.1
