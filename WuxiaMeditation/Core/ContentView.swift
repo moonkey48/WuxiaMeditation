@@ -11,12 +11,6 @@ struct ContentView: View {
     @StateObject private var notificationManager = NotificationManager()
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
     
-    init() {
-        UserDefaults.standard.setValue(3, forKey: "breathSpeed")
-        UserDefaults.standard.setValue(true, forKey: "isHapticOn")
-        UserDefaults.standard.setValue("Somnolent_TheTides", forKey: "selectedMusic")
-    }
-    
     var body: some View {
         Group {
             if isOnboarding {
@@ -26,6 +20,13 @@ struct ContentView: View {
             }
         }
         .environmentObject(notificationManager)
+        .onAppear {
+            if isOnboarding {
+                UserDefaults.standard.setValue(3, forKey: "breathSpeed")
+                UserDefaults.standard.setValue(true, forKey: "isHapticOn")
+                UserDefaults.standard.setValue("Somnolent_TheTides", forKey: "selectedMusic")
+            }
+        }
     }
 }
 
