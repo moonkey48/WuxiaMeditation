@@ -66,7 +66,9 @@ extension MeditationObservable {
     }
     
     func setMeditationStarted(_ meditationRange: MeditationRange) {
-        hapticManager?.hapticOnPoints(selectedMeditaionRange)
+        if UserDefaults.standard.bool(forKey: "isHapticOn") {
+            hapticManager?.hapticOnPoints(selectedMeditaionRange)
+        }
         withAnimation {
             selectedMeditaionRange = meditationRange
             timerForMeditation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in

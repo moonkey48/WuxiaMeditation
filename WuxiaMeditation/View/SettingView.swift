@@ -15,6 +15,7 @@ struct SettingView: View {
     @AppStorage("thirdTimeString") var thirdTimeString: String = "23:00"
     
     @AppStorage("breathSpeed") var breathSpeed: Double = 3
+    @AppStorage("isHapticOn") var isHapticOn: Bool = true
     
     @State private var isEditMode = false
     @State private var firstTime = Date()
@@ -75,6 +76,24 @@ struct SettingView: View {
                             }
                             Slider(value: $breathSpeed, in: 1...5, step: 1)
                                 .tint(.primaryGreen)
+                        }
+                        .padding()
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.white.opacity(0.3))
+                    )
+                    VStack {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("햅틱 사용")
+                                    .font(.customTitle3Bold)
+                                Spacer()
+                                Toggle(isOn: $isHapticOn, label: {
+                                    Text("")
+                                })
+                                
+                            }
                         }
                         .padding()
                     }
