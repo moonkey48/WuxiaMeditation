@@ -20,7 +20,7 @@ struct LargeButtonView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 12.0)
                     .fill(meditationRange == .smallMeditation ? .primaryGreen : .secondaryGreen)
-                    .frame(width: .infinity, height: 50)
+                    .frame(height: 50)
                 Text(title)
                     .font(.customBody)
                     .foregroundStyle(color)

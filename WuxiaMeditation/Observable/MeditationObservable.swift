@@ -24,8 +24,11 @@ final class MeditationObservable {
     var timerCount: Int = 0
     var meditationTimeRemaining: String = ""
     
+    let hapticManager: HapticManager?
+    
     var breathStateDescription: BreathState? {
-        let dump = Int(timeForScale) % (BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2)
+        let breathSpeed = UserDefaults.standard.double(forKey: "breathSpeed") / 3
+        let dump = Int(timeForScale * Float(breathSpeed)) % (BreathState.inhaleExhale * 2 + BreathState.pauseGap * 2)
         
         if dump >= BreathState.pauseGap && dump < BreathState.inhaleExhale + BreathState.pauseGap {
             return .exhale
@@ -37,8 +40,10 @@ final class MeditationObservable {
     }
     
     
+    
     init() {
-//        AudioPlayManager.shared.playSound(sound: "meditation")
+        AudioPlayManager.shared.playSound(sound: UserDefaults.standard.string(forKey: "selectedMusic") ?? "Amber_VYEN")
+        self.hapticManager = HapticManager()
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
             self?.timeForRotating += 0.1
         }
@@ -61,10 +66,14 @@ extension MeditationObservable {
     }
     
     func setMeditationStarted(_ meditationRange: MeditationRange) {
+        if UserDefaults.standard.bool(forKey: "isHapticOn") {
+            hapticManager?.hapticOnPoints(selectedMeditaionRange)
+        }
         withAnimation {
             selectedMeditaionRange = meditationRange
             timerForMeditation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
-                self?.timeForScale += 0.1
+                self?.timeForScale += 0.05
+            
             }
             futureData = Calendar.current.date(byAdding: .minute, value: selectedMeditaionRange.time, to: Date()) ?? Date()
             updateTimeRemaining()
@@ -90,6 +99,7 @@ extension MeditationObservable {
 // Meditation
 extension MeditationObservable {
     func setMeditationEnded() {
+        hapticManager?.stop()
         timeForScale = 0
         withAnimation {
             timerForMeditation?.invalidate()

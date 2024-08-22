@@ -87,7 +87,7 @@ float smoothNoise(float2 st) {
 }
 
 [[ stitchable ]]
-half4 circleMotionWithBackground(float2 position, float4 bounds, float size, float time, float secondTime) {
+half4 circleMotionWithBackground(float2 position, float4 bounds, float size, float time, float secondTime, float breathSpeed) {
     float2 center = bounds.zw / 2.0;
     float2 pos = position - center;
     
@@ -95,7 +95,7 @@ half4 circleMotionWithBackground(float2 position, float4 bounds, float size, flo
     float minRadius = maxRadius / 4.0;
     
     float cycleTime = 14.0;
-    float t = fmod(secondTime, cycleTime);
+    float t = fmod(secondTime * breathSpeed / 3, cycleTime);
     float radius;
     
     if (t < 2.0) {

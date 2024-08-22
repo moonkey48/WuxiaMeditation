@@ -8,28 +8,33 @@
 import SwiftUI
 
 struct MainView: View {
+    @AppStorage("breathSpeed") var breathSpeed: Double = 3
     @State private var observable: MeditationObservable = MeditationObservable()
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Rectangle()
-                    .fill(.circleMotionWithBackground(timeForRotating: observable.timeForRotating, timeForScale: observable.timeForScale))
+                    .fill(.circleMotionWithBackground(timeForRotating: observable.timeForRotating, timeForScale: observable.timeForScale, breathSpeed: Float(breathSpeed)))
                     .ignoresSafeArea()
                 VStack {
                     HStack {
-                        Image(systemName: "aqi.medium")
-                            .imageScale(.large)
-                            .foregroundStyle(.clear)
+                        if case .notStarted = observable.meditationState {
+                            Image(systemName: "aqi.medium")
+                                .imageScale(.large)
+                                .foregroundStyle(.clear)
+                        }
                         Spacer()
                         Text("運氣調息")
                             .font(.title3)
                         Spacer()
-                        NavigationLink {
-                            SettingView()
-                        } label: {
-                            Image(systemName: "aqi.medium")
-                                .imageScale(.large)
+                        if case .notStarted = observable.meditationState {
+                            NavigationLink {
+                                SettingView()
+                            } label: {
+                                Image(systemName: "aqi.medium")
+                                    .imageScale(.large)
+                            }
                         }
                     }
                     .foregroundStyle(.primaryGreen)
