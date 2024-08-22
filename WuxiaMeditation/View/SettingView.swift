@@ -198,7 +198,7 @@ struct SettingView: View {
         firstTimeString = dateFormmater.string(from: firstTime)
         secondTimeString = dateFormmater.string(from: secondTime)
         thirdTimeString = dateFormmater.string(from: thirdTime)
-        notificationManager.reScheduleNotifications([firstTime, secondTime, thirdTime])
+        notificationManager.sendNotification(dateList: [firstTime, secondTime, thirdTime])
     }
 }
 

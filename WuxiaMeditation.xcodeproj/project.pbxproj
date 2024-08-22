@@ -41,6 +41,7 @@
 		3A7382642C68F24F00C164E0 /* LordOfTheDawn_JesseGallagher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A73825B2C68F24F00C164E0 /* LordOfTheDawn_JesseGallagher.mp3 */; };
 		3A7382652C68F24F00C164E0 /* Tratak_JesseGallagher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A73825C2C68F24F00C164E0 /* Tratak_JesseGallagher.mp3 */; };
 		3A7382672C68F3F700C164E0 /* SelectMusicModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7382662C68F3F700C164E0 /* SelectMusicModalView.swift */; };
+		3A8D26472C777F8800BAA015 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D26462C777F8800BAA015 /* AppDelegate.swift */; };
 		3A9EB0B72C59182700DA5553 /* DefaultBackgroundAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EB0B62C59182700DA5553 /* DefaultBackgroundAnimationView.swift */; };
 		3ABBCE8B2C5F5A3100D453A0 /* MeditationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABBCE8A2C5F5A3100D453A0 /* MeditationState.swift */; };
 		3AF108AB2C20804100A956A1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF108AA2C20804100A956A1 /* NotificationManager.swift */; };
@@ -85,6 +86,7 @@
 		3A73825B2C68F24F00C164E0 /* LordOfTheDawn_JesseGallagher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LordOfTheDawn_JesseGallagher.mp3; path = Product/backgroundMusic/LordOfTheDawn_JesseGallagher.mp3; sourceTree = SOURCE_ROOT; };
 		3A73825C2C68F24F00C164E0 /* Tratak_JesseGallagher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Tratak_JesseGallagher.mp3; path = Product/backgroundMusic/Tratak_JesseGallagher.mp3; sourceTree = SOURCE_ROOT; };
 		3A7382662C68F3F700C164E0 /* SelectMusicModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMusicModalView.swift; sourceTree = "<group>"; };
+		3A8D26462C777F8800BAA015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A9EB0B62C59182700DA5553 /* DefaultBackgroundAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBackgroundAnimationView.swift; sourceTree = "<group>"; };
 		3ABBCE8A2C5F5A3100D453A0 /* MeditationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationState.swift; sourceTree = "<group>"; };
 		3AF108AA2C20804100A956A1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				3A5AFB6A2C1CA6FD0093D449 /* WuxiaMeditationApp.swift */,
 				3A5AFB6C2C1CA6FD0093D449 /* ContentView.swift */,
+				3A8D26462C777F8800BAA015 /* AppDelegate.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8D26472C777F8800BAA015 /* AppDelegate.swift in Sources */,
 				3A5AFB6D2C1CA6FD0093D449 /* ContentView.swift in Sources */,
 				3ABBCE8B2C5F5A3100D453A0 /* MeditationState.swift in Sources */,
 				3A5AFBB02C1D07660093D449 /* AudioPlayManager.swift in Sources */,

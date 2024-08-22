@@ -15,24 +15,26 @@ struct Notification {
 
 class NotificationManager: ObservableObject {
     @Published var notifications = [Notification]()
+    private let notificationCenter = UNUserNotificationCenter.current()
     
     init() {
         requestPermission()
     }
     
-    private func requestPermission(){
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
-        })
-    }
-    
     func sendNotification(dateList: [Date]) -> Void {
+        notificationCenter.removeAllPendingNotificationRequests()
         for date in dateList { notifications.append(Notification(date: date)) }
         schedule()
     }
     
-    func schedule() -> Void {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
+    func requestPermission(){
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
+            print(granted)
+        })
+    }
+    
+    private func schedule() -> Void {
+        notificationCenter.getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .notDetermined:
                 self.requestPermission()
@@ -59,14 +61,9 @@ class NotificationManager: ObservableObject {
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
             
-            UNUserNotificationCenter.current().add(request) { error in
+            notificationCenter.add(request) { error in
                 guard error == nil else { return }
             }
         }
-    }
-    
-    func reScheduleNotifications(_ dateList: [Date]) {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        sendNotification(dateList: dateList)
     }
 }
