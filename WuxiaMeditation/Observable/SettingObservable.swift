@@ -8,54 +8,34 @@
 import Foundation
 
 class SettingObservable: ObservableObject {
+    @UserDefault(key: "firstTimeString", defaultValue: "7:30")
     var firstTimeString: String {
-        get {
-            UserDefaults.standard.string(forKey: "firstTimeString") ?? "error"
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "firstTimeString")
-        }
+        willSet { objectWillChange.send() }
     }
-    var secondTimeString: String {
-        get {
-            UserDefaults.standard.string(forKey: "secondTimeString") ?? "error"
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "secondTimeString")
-        }
+    
+    @UserDefault(key: "secondTimeString", defaultValue: "18:00")
+    var secondTimeString: String  {
+        willSet { objectWillChange.send() }
     }
-    var thirdTimeString: String {
-        get {
-            UserDefaults.standard.string(forKey: "thirdTimeString") ?? "error"
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "thirdTimeString")
-        }
+    
+    @UserDefault(key: "thirdTimeString", defaultValue: "23:00")
+    var thirdTimeString: String  {
+        willSet { objectWillChange.send() }
     }
-    var breathSpeed: Double {
-        get {
-            UserDefaults.standard.double(forKey: "breathSpeed")
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "breathSpeed")
-        }
+    
+    @UserDefault(key: "breathSpeed", defaultValue: 3)
+    var breathSpeed: Double  {
+        willSet { objectWillChange.send() }
     }
-
-    var isHapticOn: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: "isHapticOn")
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "isHapticOn")
-        }
+    
+    @UserDefault(key: "isHapticOn", defaultValue: true)
+    var isHapticOn: Bool  {
+        willSet { objectWillChange.send() }
     }
-    var selectedMusic: String {
-        get {
-            UserDefaults.standard.string(forKey: "selectedMusic") ?? ""
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "selectedMusic")
-        }
+    
+    @UserDefault(key: "selectedMusic", defaultValue: AudioPlayManager.musicList.first ?? "")
+    var selectedMusic: String  {
+        willSet { objectWillChange.send() }
     }
     
     @Published var isEditMode = false
@@ -66,16 +46,28 @@ class SettingObservable: ObservableObject {
     @Published var isShowWuxiaInfo = false
     @Published var isMusicSelect = false
     
-    private let hapticManager: HapticInterface?
-    private let audioPlayManager: AudioPlayInterface
-    private let notificationManager: NotificationInterface
+    init() { }
     
-    init() {
-        hapticManager = HapticManager()
-        audioPlayManager = AudioPlayManager()
-        notificationManager = NotificationManager()
-        audioPlayManager.playSound(sound: UserDefaults.standard.string(forKey: "selectedMusic"))
+    func setDateFromUserDefaults() {
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "HH:mm"
+        if let firstDate = dateFormmater.date(from: firstTimeString) {
+            firstTime = firstDate
+        }
+        if let secondDate = dateFormmater.date(from: secondTimeString) {
+            secondTime = secondDate
+        }
+        if let thirdDate = dateFormmater.date(from: thirdTimeString) {
+            thirdTime = thirdDate
+        }
     }
     
-    
+    func setUserDefaultsFromDates() {
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "HH:mm"
+        firstTimeString = dateFormmater.string(from: firstTime)
+        secondTimeString = dateFormmater.string(from: secondTime)
+        thirdTimeString = dateFormmater.string(from: thirdTime)
+        NotificationManager().sendNotification(dateList: [firstTime, secondTime, thirdTime])
+    }
 }
