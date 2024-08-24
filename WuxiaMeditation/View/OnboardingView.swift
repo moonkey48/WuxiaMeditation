@@ -65,7 +65,7 @@ struct OnboardingView: View {
                 .padding(.bottom, 30)
                 
                 LargeButtonView(title: "시작") {
-                    NotificationManager.sendNotification(dateList: dateList)
+                    NotificationManager().sendNotification(dateList: dateList)
                     withAnimation {
                         isStart = true
                     }

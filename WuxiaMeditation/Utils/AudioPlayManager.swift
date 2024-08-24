@@ -8,10 +8,10 @@
 import AVFoundation
 
 protocol AudioPlayInterface {
-    static func playSound(sound: String?) -> Void
+    func playSound(sound: String?) -> Void
 }
 
-struct AudioPlayManager: AudioPlayInterface {
+class AudioPlayManager: AudioPlayInterface {
     static var musicList: [String] = [
         "Amber_VYEN",
         "LordOfTheDawn_JesseGallagher",
@@ -24,12 +24,12 @@ struct AudioPlayManager: AudioPlayInterface {
         "Venkatesananda_JesseGallagher"
     ]
     
-    static private var audioPlayer: AVAudioPlayer?
+    private var audioPlayer: AVAudioPlayer?
     
-    static func playSound(sound: String? = musicList[0]) {
+    func playSound(sound: String? = musicList[0]) {
         if let path = Bundle.main.path(forResource: sound, ofType: "mp3") {
             do {
-                AudioPlayManager.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
 //                audioPlayer?.play()
             } catch {
                 

@@ -13,7 +13,7 @@ struct SelectMusicModalView: View {
         List(AudioPlayManager.musicList, id: \.self) { musicName in
             Button {
                 selectedMusic = musicName
-                AudioPlayManager.playSound(sound: musicName)
+                AudioPlayManager().playSound(sound: musicName)
             } label: {
                 Text(musicName)
             }

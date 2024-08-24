@@ -14,24 +14,24 @@ struct Notification {
 }
 
 protocol NotificationInterface {
-    static func sendNotification(dateList: [Date]) -> Void
-    static func requestPermission() -> Void
+    func sendNotification(dateList: [Date]) -> Void
+    func requestPermission() -> Void
 }
 
 struct NotificationManager: NotificationInterface {
-    static func sendNotification(dateList: [Date]) -> Void {
+    func sendNotification(dateList: [Date]) -> Void {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         var notifications = [Notification]()
         for date in dateList { notifications.append(Notification(date: date)) }
         scheduleNotifications(notifications)
     }
     
-    static func requestPermission() {
+    func requestPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
         })
     }
     
-    private static func scheduleNotifications(_ notifications: [Notification]) -> Void {
+    private func scheduleNotifications(_ notifications: [Notification]) -> Void {
         for notification in notifications {
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current

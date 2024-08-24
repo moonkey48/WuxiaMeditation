@@ -8,21 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    @AppStorage("firstTimeString") var firstTimeString: String = "07:30"
-    @AppStorage("secondTimeString") var secondTimeString: String = "18:00"
-    @AppStorage("thirdTimeString") var thirdTimeString: String = "23:00"
-    
-    @AppStorage("breathSpeed") var breathSpeed: Double = 3
-    @AppStorage("isHapticOn") var isHapticOn: Bool = true
-    @AppStorage("selectedMusic") var selectedMusic: String = "Somnolent_TheTides"
-    
-    @State private var isEditMode = false
-    @State private var firstTime = Date()
-    @State private var secondTime = Date()
-    @State private var thirdTime = Date()
-    
-    @State private var isShowWuxiaInfo = false
-    @State private var isMusicSelect = false
+    @StateObject private var settingObservable = SettingObservable()
     
     var body: some View {
         ZStack {
@@ -37,25 +23,25 @@ struct SettingView: View {
                             Image(systemName: "person.and.background.dotted")
                         }
                         Divider()
-                        if isEditMode {
-                            DatePicker("첫번째 운기조식", selection: $firstTime, displayedComponents: [.hourAndMinute])
-                            DatePicker("두번째 운기조식", selection: $secondTime, displayedComponents: [.hourAndMinute])
-                            DatePicker("세번째 운기조식", selection: $thirdTime, displayedComponents: [.hourAndMinute])
+                        if settingObservable.isEditMode {
+                            DatePicker("첫번째 운기조식", selection: $settingObservable.firstTime, displayedComponents: [.hourAndMinute])
+                            DatePicker("두번째 운기조식", selection: $settingObservable.secondTime, displayedComponents: [.hourAndMinute])
+                            DatePicker("세번째 운기조식", selection: $settingObservable.thirdTime, displayedComponents: [.hourAndMinute])
                         } else {
                             HStack {
                                 Text("첫번째 운기조식")
                                 Spacer()
-                                Text(firstTime.hourAndMinute)
+                                Text(settingObservable.firstTime.hourAndMinute)
                             }
                             HStack {
                                 Text("두번째 운기조식")
                                 Spacer()
-                                Text(secondTime.hourAndMinute)
+                                Text(settingObservable.secondTime.hourAndMinute)
                             }
                             HStack {
                                 Text("세번째 운기조식")
                                 Spacer()
-                                Text(thirdTime.hourAndMinute)
+                                Text(settingObservable.thirdTime.hourAndMinute)
                             }
                         }
                     }
@@ -70,11 +56,11 @@ struct SettingView: View {
                                 Text("호흡 속도")
                                     .font(.customTitle3Bold)
                                 Spacer()
-                                Text(BreathState.getBreathSpeedDescription(breathSpeed))
-                                    .animation(.easeInOut, value: breathSpeed)
+                                Text(BreathState.getBreathSpeedDescription(settingObservable.breathSpeed))
+                                    .animation(.easeInOut, value: settingObservable.breathSpeed)
                                 
                             }
-                            Slider(value: $breathSpeed, in: 1...5, step: 1)
+                            Slider(value: $settingObservable.breathSpeed, in: 1...5, step: 1)
                                 .tint(.primaryGreen)
                         }
                         .padding()
@@ -89,7 +75,7 @@ struct SettingView: View {
                                 Text("햅틱 사용")
                                     .font(.customTitle3Bold)
                                 Spacer()
-                                Toggle(isOn: $isHapticOn, label: {
+                                Toggle(isOn: $settingObservable.isHapticOn, label: {
                                     Text("")
                                 })
                             }
@@ -101,13 +87,13 @@ struct SettingView: View {
                             .fill(.white.opacity(0.3))
                     )
                     Button {
-                        isMusicSelect = true
+                        settingObservable.isMusicSelect = true
                     } label: {
                         HStack(spacing: 24) {
                             Text("배경음악")
                                 .font(.customTitle3Bold)
                             Spacer()
-                            Text(selectedMusic)
+                            Text(settingObservable.selectedMusic)
                         }
                         .padding(20)
                         .background(
@@ -116,7 +102,7 @@ struct SettingView: View {
                         )
                     }
                     Button {
-                        isShowWuxiaInfo = true
+                        settingObservable.isShowWuxiaInfo = true
                     } label: {
                         HStack(spacing: 24) {
                             Text("무협입문 武俠入門")
@@ -138,11 +124,11 @@ struct SettingView: View {
             .foregroundStyle(.white)
             .colorScheme(.dark)
             .toolbar {
-                if isEditMode {
+                if settingObservable.isEditMode {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             setDateFromUserDefaults()
-                            isEditMode.toggle()
+                            settingObservable.isEditMode.toggle()
                         } label: {
                             Text("취소")
                         }
@@ -150,12 +136,12 @@ struct SettingView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        if isEditMode {
+                        if settingObservable.isEditMode {
                             setUserDefaultsFromDates()
                         }
-                        isEditMode.toggle()
+                        settingObservable.isEditMode.toggle()
                     } label: {
-                        if isEditMode {
+                        if settingObservable.isEditMode {
                             Text("저장")
                         } else {
                             Text("수정")
@@ -164,10 +150,10 @@ struct SettingView: View {
                 }
             }
             .padding()
-            .sheet(isPresented: $isShowWuxiaInfo) {
-                WuxiaInfoView(isShowWuxiaInfo: $isShowWuxiaInfo)
+            .sheet(isPresented: $settingObservable.isShowWuxiaInfo) {
+                WuxiaInfoView(isShowWuxiaInfo: $settingObservable.isShowWuxiaInfo)
             }
-            .sheet(isPresented: $isMusicSelect) {
+            .sheet(isPresented: $settingObservable.isMusicSelect) {
                 SelectMusicModalView()
             }
             .onAppear {
@@ -179,24 +165,24 @@ struct SettingView: View {
     func setDateFromUserDefaults() {
         let dateFormmater = DateFormatter()
         dateFormmater.dateFormat = "HH:mm"
-        if let firstDate = dateFormmater.date(from: firstTimeString) {
-            firstTime = firstDate
+        if let firstDate = dateFormmater.date(from: settingObservable.firstTimeString) {
+            settingObservable.firstTime = firstDate
         }
-        if let secondDate = dateFormmater.date(from: secondTimeString) {
-            secondTime = secondDate
+        if let secondDate = dateFormmater.date(from: settingObservable.secondTimeString) {
+            settingObservable.secondTime = secondDate
         }
-        if let thirdDate = dateFormmater.date(from: thirdTimeString) {
-            thirdTime = thirdDate
+        if let thirdDate = dateFormmater.date(from: settingObservable.thirdTimeString) {
+            settingObservable.thirdTime = thirdDate
         }
     }
     
     func setUserDefaultsFromDates() {
         let dateFormmater = DateFormatter()
         dateFormmater.dateFormat = "HH:mm"
-        firstTimeString = dateFormmater.string(from: firstTime)
-        secondTimeString = dateFormmater.string(from: secondTime)
-        thirdTimeString = dateFormmater.string(from: thirdTime)
-        NotificationManager.sendNotification(dateList: [firstTime, secondTime, thirdTime])
+        settingObservable.firstTimeString = dateFormmater.string(from: settingObservable.firstTime)
+        settingObservable.secondTimeString = dateFormmater.string(from: settingObservable.secondTime)
+        settingObservable.thirdTimeString = dateFormmater.string(from: settingObservable.thirdTime)
+        NotificationManager().sendNotification(dateList: [settingObservable.firstTime, settingObservable.secondTime, settingObservable.thirdTime])
     }
 }
 
