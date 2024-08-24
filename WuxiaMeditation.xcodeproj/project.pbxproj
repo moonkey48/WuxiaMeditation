@@ -206,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				3A6D29622C40079400C1BD41 /* Shader */,
-				3A5AFBAE2C1D07550093D449 /* Manager */,
 				3A5AFB882C1CB0B50093D449 /* Extension */,
 				3A5AFB872C1CB0A70093D449 /* Components */,
 			);
@@ -231,14 +230,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		3A5AFBAE2C1D07550093D449 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				3A5AFBAF2C1D07660093D449 /* AudioPlayManager.swift */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		3A5AFBC12C2046540093D449 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +252,7 @@
 			children = (
 				3AF108AA2C20804100A956A1 /* NotificationManager.swift */,
 				3A7382402C67A7C600C164E0 /* HapticManager.swift */,
+				3A5AFBAF2C1D07660093D449 /* AudioPlayManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

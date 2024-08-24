@@ -10,7 +10,6 @@ import SwiftUI
 
 struct OnboardingView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
-    @EnvironmentObject var notificationManager: NotificationManager
     @State private var isShowChangeNotificationDate = false
     @State private var dateList: [Date] = []
     @State private var isStart = false
@@ -66,7 +65,7 @@ struct OnboardingView: View {
                 .padding(.bottom, 30)
                 
                 LargeButtonView(title: "시작") {
-                    notificationManager.sendNotification(dateList: dateList)
+                    NotificationManager.sendNotification(dateList: dateList)
                     withAnimation {
                         isStart = true
                     }

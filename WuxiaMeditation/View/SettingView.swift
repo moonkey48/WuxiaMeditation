@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SettingView: View {
-    @EnvironmentObject var notificationManager: NotificationManager
-    
     @AppStorage("firstTimeString") var firstTimeString: String = "07:30"
     @AppStorage("secondTimeString") var secondTimeString: String = "18:00"
     @AppStorage("thirdTimeString") var thirdTimeString: String = "23:00"
@@ -198,7 +196,7 @@ struct SettingView: View {
         firstTimeString = dateFormmater.string(from: firstTime)
         secondTimeString = dateFormmater.string(from: secondTime)
         thirdTimeString = dateFormmater.string(from: thirdTime)
-        notificationManager.sendNotification(dateList: [firstTime, secondTime, thirdTime])
+        NotificationManager.sendNotification(dateList: [firstTime, secondTime, thirdTime])
     }
 }
 

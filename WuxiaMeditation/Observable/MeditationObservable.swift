@@ -42,7 +42,7 @@ final class MeditationObservable {
     
     
     init() {
-        AudioPlayManager.shared.playSound(sound: UserDefaults.standard.string(forKey: "selectedMusic") ?? "Amber_VYEN")
+        AudioPlayManager.playSound(sound: UserDefaults.standard.string(forKey: "selectedMusic"))
         self.hapticManager = HapticManager()
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
             self?.timeForRotating += 0.1
@@ -67,7 +67,7 @@ extension MeditationObservable {
     
     func setMeditationStarted(_ meditationRange: MeditationRange) {
         if UserDefaults.standard.bool(forKey: "isHapticOn") {
-            hapticManager?.hapticOnPoints(selectedMeditaionRange)
+            hapticManager?.startHaptic(selectedMeditaionRange == .smallMeditation ? 60 : 60 * 5)
         }
         withAnimation {
             selectedMeditaionRange = meditationRange

@@ -7,10 +7,11 @@
 
 import AVFoundation
 
-final class AudioPlayManager {
-    static let shared = AudioPlayManager()
-    private init() {}
-    
+protocol AudioPlayInterface {
+    static func playSound(sound: String?) -> Void
+}
+
+struct AudioPlayManager: AudioPlayInterface {
     static var musicList: [String] = [
         "Amber_VYEN",
         "LordOfTheDawn_JesseGallagher",
@@ -23,13 +24,13 @@ final class AudioPlayManager {
         "Venkatesananda_JesseGallagher"
     ]
     
-    var audioPlayer: AVAudioPlayer?
+    static private var audioPlayer: AVAudioPlayer?
     
-    func playSound(sound: String) {
+    static func playSound(sound: String? = musicList[0]) {
         if let path = Bundle.main.path(forResource: sound, ofType: "mp3") {
             do {
-                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                audioPlayer?.play()
+                AudioPlayManager.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+//                audioPlayer?.play()
             } catch {
                 
             }
