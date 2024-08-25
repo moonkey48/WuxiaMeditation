@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
+    @AppStorage("totalMeditationTime") private var totalMeditationTime: Int = 0
     
     var body: some View {
         Group {

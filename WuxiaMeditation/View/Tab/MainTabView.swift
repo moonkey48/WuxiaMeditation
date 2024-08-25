@@ -14,6 +14,10 @@ struct MainTabView: View {
                 .tabItem {
                     Label("운기조식", systemImage: "aqi.medium")
                 }
+            RankingView()
+                .tabItem {
+                    Label("고수 랭킹", systemImage: "person.3.fill")
+                }
             SettingView()
                 .tabItem {
                     Label("설정", systemImage: "person.and.background.striped.horizontal")
