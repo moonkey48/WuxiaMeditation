@@ -18,26 +18,9 @@ struct MainView: View {
                     .fill(.circleMotionWithBackground(timeForRotating: observable.timeForRotating, timeForScale: observable.timeForScale, breathSpeed: Float(breathSpeed)))
                     .ignoresSafeArea()
                 VStack {
-                    HStack {
-                        if case .notStarted = observable.meditationState {
-                            Image(systemName: "aqi.medium")
-                                .imageScale(.large)
-                                .foregroundStyle(.clear)
-                        }
-                        Spacer()
-                        Text("運氣調息")
-                            .font(.title3)
-                        Spacer()
-                        if case .notStarted = observable.meditationState {
-                            NavigationLink {
-                                SettingView()
-                            } label: {
-                                Image(systemName: "aqi.medium")
-                                    .imageScale(.large)
-                            }
-                        }
-                    }
-                    .foregroundStyle(.primaryGreen)
+                    Text("運氣調息")
+                        .font(.title3)
+                        .foregroundStyle(.primaryGreen)
                     Spacer()
                     switch observable.meditationState {
                     case .notStarted: EnergyCenterView(observable: observable)
@@ -56,7 +39,6 @@ struct MainView: View {
                 observable.checkWuxiaTimeChanged()
             }
         }
-        .tint(.primaryGreen)
     }
 }
 
@@ -69,7 +51,7 @@ private extension MainView {
                 Text("마지막으로 눈을 감고,\n생각을 갈무리 하신 뒤 종료하십시오.")
                     .foregroundStyle(.black.opacity(0.6))
                     .padding(.bottom, 20)
-                    
+                
                 HStack {
                     Button {
                         withAnimation {

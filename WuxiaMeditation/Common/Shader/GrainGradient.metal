@@ -87,7 +87,7 @@ float smoothNoise(float2 st) {
 }
 
 [[ stitchable ]]
-half4 circleMotionWithBackground(float2 position, float4 bounds, float size, float time, float secondTime, float breathSpeed) {
+half4 circleMotionWithBackground(float2 position, float4 bounds, float size, float time, float secondTime, float breathSpeed, float backgroudMode) {
     float2 center = bounds.zw / 2.0;
     float2 pos = position - center;
     
@@ -123,16 +123,26 @@ half4 circleMotionWithBackground(float2 position, float4 bounds, float size, flo
     
     half4 greenColor = half4(149.0/255.0, 178.0/255.0, 150.0/255.0, 1.0);
     half4 beigeColor = half4(240.0/255.0, 224.0/255.0, 188.0/255.0, 1.0);
-    
+    half4 redColor = half4(0.74, 0.36, 0.36, 1.0);
+    half4 blueColor = half4(0.36, 0.55, 0.74, 1.0);
+    half4 mainColor;
+    if (backgroudMode == 0) {
+        mainColor = blueColor;
+    } else if (backgroudMode == 1) {
+        mainColor = greenColor;
+    } else {
+        mainColor = redColor;
+    }
+
     float smoothWidth = maxRadius / 3.0;
-    half4 color = mix(greenColor, beigeColor, smoothstep(edgeRadius - smoothWidth, edgeRadius + smoothWidth, distFromCenter));
+    half4 color = mix(mainColor, beigeColor, smoothstep(edgeRadius - smoothWidth, edgeRadius + smoothWidth, distFromCenter));
     
     // Softer edge effect
     float edgeWidth = smoothWidth * 8.0;
     float edgeGap = smoothWidth * 3.0;
     float edgeEffect = smoothstep(edgeRadius + edgeGap, edgeRadius + edgeGap + edgeWidth * 0.5, distFromCenter) *
                        (1.0 - smoothstep(edgeRadius + edgeGap + edgeWidth * 0.5, edgeRadius + edgeGap + edgeWidth, distFromCenter));
-    color = mix(color, greenColor, edgeEffect * 0.4);
+    color = mix(color, mainColor, edgeEffect * 0.4);
     
     // Grain effect
     float2 coords = position / bounds.zw;

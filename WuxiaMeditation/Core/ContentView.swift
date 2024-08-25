@@ -9,15 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
+    @AppStorage("totalMeditationTime") private var totalMeditationTime: Int = 0
     
     var body: some View {
         Group {
             if isOnboarding {
                 OnboardingView()
             } else {
-                MainView()
+                MainTabView()
             }
         }
+        .tint(.primaryGreen)
         .onAppear {
             if isOnboarding {
                 UserDefaults.standard.setValue(3, forKey: "breathSpeed")

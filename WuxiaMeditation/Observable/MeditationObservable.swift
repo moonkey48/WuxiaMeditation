@@ -105,6 +105,9 @@ extension MeditationObservable {
 extension MeditationObservable {
     func setMeditationEnded() {
         hapticManager?.stop()
+        let totalValue = UserDefaults.standard.integer(forKey: "totalMeditationTime")
+        UserDefaults.standard.setValue(totalValue + Int(timeForScale), forKey: "totalMeditationTime")
+        print(totalValue + Int(timeForScale))
         timeForScale = 0
         withAnimation {
             timerForMeditation?.invalidate()

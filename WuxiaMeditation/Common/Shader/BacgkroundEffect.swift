@@ -23,19 +23,27 @@ private let br = Color("bottom_right")
 
 // MARK: - Grainy gradient
 
+enum BackgroundMode: Int {
+    case blue
+    case green
+    case red
+}
+
 extension ShapeStyle where Self == AnyShapeStyle {
     static func circleMotionWithBackground(
         timeForRotating: Float,
         timeForScale: Float,
         gridSize: Int = 3,
-        breathSpeed: Float = 3
+        breathSpeed: Float = 3,
+        mode: BackgroundMode = .green
     ) -> Self {
         return AnyShapeStyle(ShaderLibrary.default.circleMotionWithBackground(
             .boundingRect,
             .float(3),
             .float(timeForRotating),
             .float(timeForScale),
-            .float(breathSpeed)
+            .float(breathSpeed),
+            .float(Float(mode.rawValue))
         ))
     }
     
