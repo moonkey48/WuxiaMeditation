@@ -93,15 +93,15 @@ struct RankingView: View {
     
     var body: some View {
         ZStack {
-            DefaultBackgroundAnimationView()
-            VStack(spacing: 30) {
+            DefaultBackgroundAnimationView(backgroundMode: .red)
+            VStack(spacing: 20) {
                 Text("끝없는 비움은\n무한한 가능성으로\n가득 차 있다.")
                     .font(.customTitle3)
                 Text("노자")
                     .font(.customCaption)
-                Text("세계 10대 고수 & 경지 기능 준비 중")
+                Text("10대 고수 & 경지 기능 준비 중")
                     .font(.customCaption)
-                    .padding(.top, 30)
+                    .padding(.top, 10)
             }
             .foregroundStyle(.white)
             .multilineTextAlignment(.center)
