@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var notificationManager = NotificationManager()
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
     
     var body: some View {
@@ -19,7 +18,6 @@ struct ContentView: View {
                 MainView()
             }
         }
-        .environmentObject(notificationManager)
         .onAppear {
             if isOnboarding {
                 UserDefaults.standard.setValue(3, forKey: "breathSpeed")

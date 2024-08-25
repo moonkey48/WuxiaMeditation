@@ -24,7 +24,9 @@ final class MeditationObservable {
     var timerCount: Int = 0
     var meditationTimeRemaining: String = ""
     
-    let hapticManager: HapticManager?
+    let hapticManager: HapticInterface?
+    let audioPlayManager: AudioPlayInterface
+    let notificationManager: NotificationInterface
     
     var breathStateDescription: BreathState? {
         let breathSpeed = UserDefaults.standard.double(forKey: "breathSpeed") / 3
@@ -42,8 +44,11 @@ final class MeditationObservable {
     
     
     init() {
-        AudioPlayManager.shared.playSound(sound: UserDefaults.standard.string(forKey: "selectedMusic") ?? "Amber_VYEN")
-        self.hapticManager = HapticManager()
+        hapticManager = HapticManager()
+        audioPlayManager = AudioPlayManager()
+        notificationManager = NotificationManager()
+        audioPlayManager.playSound(sound: UserDefaults.standard.string(forKey: "selectedMusic"))
+        
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self]_ in
             self?.timeForRotating += 0.1
         }
@@ -67,7 +72,7 @@ extension MeditationObservable {
     
     func setMeditationStarted(_ meditationRange: MeditationRange) {
         if UserDefaults.standard.bool(forKey: "isHapticOn") {
-            hapticManager?.hapticOnPoints(selectedMeditaionRange)
+            hapticManager?.startHaptic(selectedMeditaionRange == .smallMeditation ? 60 : 60 * 5)
         }
         withAnimation {
             selectedMeditaionRange = meditationRange

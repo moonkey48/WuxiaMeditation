@@ -9,12 +9,11 @@ import SwiftUI
 
 struct SelectMusicModalView: View {
     @AppStorage("selectedMusic") var selectedMusic: String = "Somnolent_TheTides"
-    private let audioPlayManager = AudioPlayManager.shared
     var body: some View {
         List(AudioPlayManager.musicList, id: \.self) { musicName in
             Button {
                 selectedMusic = musicName
-                audioPlayManager.playSound(sound: musicName)
+                AudioPlayManager().playSound(sound: musicName)
             } label: {
                 Text(musicName)
             }

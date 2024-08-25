@@ -13,38 +13,25 @@ struct Notification {
     var date: Date
 }
 
-class NotificationManager: ObservableObject {
-    @Published var notifications = [Notification]()
-    
-    init() {
-        requestPermission()
+protocol NotificationInterface {
+    func sendNotification(dateList: [Date]) -> Void
+    func requestPermission() -> Void
+}
+
+struct NotificationManager: NotificationInterface {
+    func sendNotification(dateList: [Date]) -> Void {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        var notifications = [Notification]()
+        for date in dateList { notifications.append(Notification(date: date)) }
+        scheduleNotifications(notifications)
     }
     
-    private func requestPermission(){
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
+    func requestPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .provisional, .sound, .criticalAlert, .providesAppNotificationSettings], completionHandler: { granted, error in
         })
     }
     
-    func sendNotification(dateList: [Date]) -> Void {
-        for date in dateList { notifications.append(Notification(date: date)) }
-        schedule()
-    }
-    
-    func schedule() -> Void {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            switch settings.authorizationStatus {
-            case .notDetermined:
-                self.requestPermission()
-            case .authorized, .provisional:
-                self.scheduleNotifications()
-            default:
-                self.requestPermission()
-            }
-        }
-    }
-    
-    func scheduleNotifications() -> Void {
+    private func scheduleNotifications(_ notifications: [Notification]) -> Void {
         for notification in notifications {
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current
@@ -63,10 +50,5 @@ class NotificationManager: ObservableObject {
                 guard error == nil else { return }
             }
         }
-    }
-    
-    func reScheduleNotifications(_ dateList: [Date]) {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        sendNotification(dateList: dateList)
     }
 }

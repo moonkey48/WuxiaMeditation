@@ -8,8 +8,13 @@
 import CoreHaptics
 import Foundation
 
+protocol HapticInterface {
+    func startHaptic(_ totalSeconds: Int) -> Void
+    func stop() -> Void
+}
 
-final class HapticManager {
+final class HapticManager: HapticInterface {
+    
     private let engine: CHHapticEngine
     private var player: CHHapticPatternPlayer?
 
@@ -37,14 +42,13 @@ final class HapticManager {
         engine.stop()
     }
     
-    func hapticOnPoints(_ meditationRange: MeditationRange) {
+    func startHaptic(_ totalSeconds: Int) {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
             return
         }
         
         var events = [CHHapticEvent]()
-        let minutes: Int = meditationRange == .smallMeditation ? 60 : 60 * 5
-        for i in stride(from: 0, to: Double(meditationRange.time) * Double(minutes), by: 1) {
+        for i in stride(from: 0, to: Double(totalSeconds), by: 1) {
             let time: Int = Int(i.truncatingRemainder(dividingBy: (Double(BreathState.inhaleExhale) + Double(BreathState.pauseGap)) * 2))
             if 
                 time == 0 ||
