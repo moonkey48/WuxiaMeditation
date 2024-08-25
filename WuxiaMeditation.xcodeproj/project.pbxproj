@@ -152,12 +152,9 @@
 		3A5AFB7A2C1CA7F00093D449 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3A5AFB7E2C1CA8490093D449 /* OnboardingView.swift */,
-				3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */,
-				3A5AFB852C1CAC8B0093D449 /* MainView.swift */,
-				3AF108AE2C21B9AF00A956A1 /* SettingView.swift */,
-				3A42B9F12C63AFA200F8CEC7 /* WuxiaInfoView.swift */,
-				3A7382662C68F3F700C164E0 /* SelectMusicModalView.swift */,
+				3A8D264E2C7AABA700BAA015 /* Setting */,
+				3A8D264D2C7AAB9900BAA015 /* Main */,
+				3A8D264C2C7AAB8F00BAA015 /* Onboarding */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -250,6 +247,33 @@
 				3A6D29652C425B6D00C1BD41 /* BacgkroundEffect.swift */,
 			);
 			path = Shader;
+			sourceTree = "<group>";
+		};
+		3A8D264C2C7AAB8F00BAA015 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3A5AFB7E2C1CA8490093D449 /* OnboardingView.swift */,
+				3AF108AC2C20809300A956A1 /* NotificationSelectDateView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3A8D264D2C7AAB9900BAA015 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3A5AFB852C1CAC8B0093D449 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3A8D264E2C7AABA700BAA015 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3AF108AE2C21B9AF00A956A1 /* SettingView.swift */,
+				3A42B9F12C63AFA200F8CEC7 /* WuxiaInfoView.swift */,
+				3A7382662C68F3F700C164E0 /* SelectMusicModalView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		3AF108A92C20803300A956A1 /* Utils */ = {
