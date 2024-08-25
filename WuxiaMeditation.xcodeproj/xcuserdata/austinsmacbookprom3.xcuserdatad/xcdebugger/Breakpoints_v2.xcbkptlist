@@ -18,36 +18,6 @@
             endingLineNumber = "77"
             landmarkName = "setMeditationStarted(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BF994D17-CA46-4069-9A97-26F35556E2FC - 712c5fbd9c914cd3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WuxiaMeditation.MeditationObservable.setMeditationStarted(WuxiaMeditation.MeditationRange) -&gt; ()"
-                  moduleName = "WuxiaMeditation"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/Observable/MeditationObservable.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77">
-               </Location>
-               <Location
-                  uuid = "BF994D17-CA46-4069-9A97-26F35556E2FC - 8cc08c4b415c0105"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in WuxiaMeditation.MeditationObservable.setMeditationStarted(WuxiaMeditation.MeditationRange) -&gt; ()"
-                  moduleName = "WuxiaMeditation"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/austinsmacbookprom3/Desktop/projects/WuxiaMeditation/WuxiaMeditation/Observable/MeditationObservable.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

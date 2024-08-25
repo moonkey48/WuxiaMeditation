@@ -15,9 +15,10 @@ struct ContentView: View {
             if isOnboarding {
                 OnboardingView()
             } else {
-                MainView()
+                MainTabView()
             }
         }
+        .tint(.primaryGreen)
         .onAppear {
             if isOnboarding {
                 UserDefaults.standard.setValue(3, forKey: "breathSpeed")
